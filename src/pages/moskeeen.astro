@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const mosques = [
+  {
+    id: 1,
+    name: 'Moskee Al-Fath',
+    city: 'Gent, België',
+    image: '/images/mockup-1.jpg',
+    link: '#',
+    features: ['Gebedstijden', 'Donaties', 'Agenda'],
+  },
+  {
+    id: 2,
+    name: 'Islamitisch Centrum',
+    city: 'Rotterdam, Nederland',
+    image: '/images/mockup-2.jpg',
+    link: '#',
+    features: ['Gebedstijden', 'Livestream', 'Nieuwsbrief'],
+  },
+  {
+    id: 3,
+    name: 'Moskee Ar-Rahman',
+    city: 'Antwerpen, België',
+    image: '/images/mockup-3.jpg',
+    link: '#',
+    features: ['Gebedstijden', 'Donaties', 'CMS'],
+  },
+  {
+    id: 4,
+    name: 'Stichting Assalam',
+    city: 'Utrecht, Nederland',
+    image: '/images/mockup-4.jpg',
+    link: '#',
+    features: ['Gebedstijden', 'Evenementen', 'Meertalig'],
+  },
+];
+---
+
+<Layout title="Aangesloten Moskeeën | Het Digitale Waqf VZW" description="Bekijk de portfolio van moskeeën die door Het Digitale Waqf VZW zijn voorzien van een modern digitaal platform.">
+
+  <!-- Hero -->
+  <section class="bg-gray-50 dark:bg-gray-900 py-20 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-waqf-gold font-bold tracking-wider uppercase text-sm mb-4 block">Onze Portfolio</span>
+      <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-waqf-green-dark dark:text-white mb-6">
+        Aangesloten <span class="text-waqf-green dark:text-waqf-gold">Moskee&euml;n</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        We zijn vereerd om deze prachtige gemeenschappen te mogen ondersteunen met een stabiel en professioneel platform. Elk van deze websites is gebouwd en onderhouden als Sadaqa Jariya.
+      </p>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="py-24 bg-white dark:bg-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {mosques.map((mosque) => (
+          <div class="group bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all duration-300 flex flex-col">
+            <!-- Screenshot Placeholder -->
+            <div class="h-64 bg-gray-200 dark:bg-gray-800 w-full relative overflow-hidden">
+              <div class="absolute inset-0 bg-waqf-green/5 dark:bg-waqf-green-dark/50 bg-islamic-pattern opacity-50"></div>
+              <div class="absolute inset-0 flex items-center justify-center text-gray-400 font-medium">
+                Website Screenshot
+              </div>
+            </div>
+
+            <div class="p-8 flex-grow flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 class="text-2xl font-bold text-waqf-green-dark dark:text-white font-heading">{mosque.name}</h3>
+                    <p class="text-gray-500 dark:text-gray-400 flex items-center gap-1 mt-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      {mosque.city}
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                  {mosque.features.map((feature) => (
+                    <span class="bg-gray-100 dark:bg-gray-800 text-xs font-bold text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full">{feature}</span>
+                  ))}
+                </div>
+              </div>
+
+              <a href={mosque.link} class="inline-flex items-center gap-2 text-waqf-green dark:text-waqf-gold font-bold hover:underline group-hover:gap-3 transition-all">
+                Bekijk website
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-waqf-green text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-islamic-pattern opacity-10"></div>
+    <div class="max-w-3xl mx-auto px-4 relative z-10">
+      <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6 text-white">Is jouw moskee er nog niet bij?</h2>
+      <p class="text-lg text-gray-200 mb-10">
+        Elke moskee in de Benelux verdient een waardige digitale representatie. Wij staan klaar om jullie gemeenschap te helpen. Zonder verborgen kosten, gebouwd met Ihsan.
+      </p>
+      <a href="/contact" class="inline-block bg-waqf-gold hover:bg-waqf-gold-light text-waqf-green-dark px-10 py-4 rounded-full font-bold text-lg transition shadow-xl transform hover:-translate-y-1">
+        Vraag een Website Aan
+      </a>
+    </div>
+  </section>
+</Layout>

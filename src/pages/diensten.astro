@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const features = [
+  { title: 'Professioneel Webdesign', desc: 'Op maat ontworpen websites die de identiteit van jouw moskee weerspiegelen. Modern, toegankelijk en mobielvriendelijk.', icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z' },
+  { title: 'Gebedstijden Integratie', desc: 'Automatische weergave van dagelijkse gebedstijden en iqamah-tijden via API of handmatige invoer door de imam.', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+  { title: 'Donatiesysteem (iDEAL/Bancontact)', desc: 'Veilige online betalingen via Mollie. Eenmalige of terugkerende donaties voor projecten en de moskee.', icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z' },
+  { title: 'Evenementen & Agenda', desc: 'Beheer en publiceer lessen, lezingen, Ramadan-programma\'s en community-evenementen via een simpel CMS.', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+  { title: 'Veilige Hosting & SSL', desc: 'Hosting op razendsnelle, beveiligde servers met automatisch SSL-certificaat. Jouw data is in goede handen.', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+  { title: 'Doorlopend Onderhoud', desc: 'Wij zorgen voor updates, back-ups en technische support. Het bestuur kan zich volledig focussen op de gemeenschap.', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z' },
+];
+---
+
+<Layout title="Diensten | Het Digitale Waqf VZW" description="Van dynamische gebedstijden tot donatiesystemen. Ontdek wat Het Digitale Waqf kan betekenen voor jouw moskee.">
+
+  <!-- Hero -->
+  <section class="bg-waqf-green-dark py-20 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-islamic-pattern opacity-5"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10">
+      <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white mb-6">
+        Professionele oplossingen voor de <span class="text-waqf-gold">Moderne Moskee</span>
+      </h1>
+      <p class="text-xl text-gray-300">
+        Alles wat een moskeebestuur nodig heeft om de gemeenschap te bedienen, gebundeld in &eacute;&eacute;n razendsnel platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="py-24 bg-gray-50 dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {features.map((feature) => (
+          <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-waqf-green/10 dark:bg-waqf-green-dark rounded-full flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-waqf-green dark:text-waqf-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-waqf-green-dark dark:text-white mb-3">{feature.title}</h3>
+            <p class="text-gray-600 dark:text-gray-400">{feature.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-24 bg-white dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-heading font-bold text-waqf-green-dark dark:text-white mb-4">Onze Financi&euml;le Modellen</h2>
+        <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Als Waqf streven we ernaar elke moskee te helpen. Grote moskee&euml;n kunnen via een solidariteitsbijdrage de kosten dekken voor kleinere moskee&euml;n.</p>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
+        <!-- Basis -->
+        <div class="flex-1 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-3xl p-8 shadow-sm">
+          <h3 class="text-2xl font-bold text-waqf-green-dark dark:text-white mb-2">Waqf Basis</h3>
+          <p class="text-waqf-gold font-bold text-xl mb-6">Volledig Gratis (Sadaqa Jariya)</p>
+          <p class="text-gray-600 dark:text-gray-400 mb-8 text-sm">Voor kleinere moskee&euml;n en startende gemeenschappen met beperkte middelen.</p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><svg class="w-5 h-5 text-waqf-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Professioneel Design</li>
+            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><svg class="w-5 h-5 text-waqf-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Gebedstijden Integratie</li>
+            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300"><svg class="w-5 h-5 text-waqf-green" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Gratis Hosting via ons netwerk</li>
+          </ul>
+          <a href="/contact" class="block w-full text-center border-2 border-waqf-green text-waqf-green dark:text-white dark:border-white px-6 py-3 rounded-full font-bold hover:bg-waqf-green hover:text-white transition">Aanvragen</a>
+        </div>
+
+        <!-- Solidariteit -->
+        <div class="flex-1 bg-waqf-green text-white rounded-3xl p-8 shadow-xl relative transform md:-translate-y-4">
+          <div class="absolute top-0 right-0 bg-waqf-gold text-waqf-green-dark text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl uppercase tracking-wide">Meest Gekozen</div>
+          <h3 class="text-2xl font-bold text-white mb-2">Waqf Solidariteit</h3>
+          <p class="text-waqf-gold font-bold text-xl mb-6">Jaarlijkse Vrijwillige Bijdrage</p>
+          <p class="text-gray-200 mb-8 text-sm">Voor gevestigde moskee&euml;n. Met jullie bijdrage betalen we de serverkosten en bouwen we sites voor moskee&euml;n die dit niet kunnen betalen.</p>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-waqf-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Alles uit het basis pakket</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-waqf-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Geavanceerde Donatie Module</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-waqf-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Prioriteit bij Support</li>
+            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-waqf-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sadaqa voor de Ummah</li>
+          </ul>
+          <a href="/contact" class="block w-full text-center bg-waqf-gold hover:bg-waqf-gold-light text-waqf-green-dark px-6 py-3 rounded-full font-bold transition shadow-lg">Steun &amp; Vraag Aan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-bold text-center text-waqf-green-dark dark:text-white mb-12">Veelgestelde Vragen</h2>
+
+      <div class="space-y-4">
+        <details class="group bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <h3 class="font-bold text-waqf-green-dark dark:text-white">Behouden wij zelf de controle over onze website?</h3>
+            <span class="relative shrink-0 ml-1.5 w-5 h-5 text-waqf-gold">
+              <svg class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              <svg class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+            </span>
+          </summary>
+          <div class="p-6 pt-0 text-gray-600 dark:text-gray-400">
+            Ja, absoluut. Jullie behouden de eigendom over de domeinnaam en alle content. Wij leveren slechts de technische motor en het onderhoud. Jullie kunnen zelf nieuws en uren aanpassen via het CMS.
+          </div>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <h3 class="font-bold text-waqf-green-dark dark:text-white">Hoe berekenen jullie de gebedstijden?</h3>
+            <span class="relative shrink-0 ml-1.5 w-5 h-5 text-waqf-gold">
+              <svg class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              <svg class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+            </span>
+          </summary>
+          <div class="p-6 pt-0 text-gray-600 dark:text-gray-400">
+            We kunnen koppelen met externe API&apos;s zoals AlAdhan, of we importeren jullie specifieke Excel/CSV bestand dat jullie Imam hanteert voor jullie specifieke moskee (inclusief zomertijd/wintertijd berekeningen).
+          </div>
+        </details>
+
+        <details class="group bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <h3 class="font-bold text-waqf-green-dark dark:text-white">Hoe lang duurt het om een website te maken?</h3>
+            <span class="relative shrink-0 ml-1.5 w-5 h-5 text-waqf-gold">
+              <svg class="absolute inset-0 w-5 h-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              <svg class="absolute inset-0 w-5 h-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+            </span>
+          </summary>
+          <div class="p-6 pt-0 text-gray-600 dark:text-gray-400">
+            Zodra we alle informatie (foto&apos;s, teksten, gebedstijden) van het bestuur hebben ontvangen, kan de website doorgaans binnen 2 tot 4 weken live staan.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Layout>

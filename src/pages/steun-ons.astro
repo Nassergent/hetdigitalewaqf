@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DonationForm from '../components/react/DonationForm';
+---
+
+<Layout title="Steun Ons | Het Digitale Waqf VZW" description="Draag bij aan de moskeeën van de toekomst. Jouw Sadaqa Jariya zorgt voor veilige, snelle websites voor de hele Ummah.">
+
+  <!-- Hero & Formulier -->
+  <section class="relative bg-waqf-green-dark py-20 lg:py-32 overflow-hidden border-b-8 border-waqf-gold">
+    <div class="absolute inset-0 bg-islamic-pattern opacity-10"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="flex flex-col lg:flex-row gap-16 items-center">
+        <div class="lg:w-1/2 text-white">
+          <span class="text-waqf-gold font-bold tracking-wider uppercase text-sm mb-4 block">Sadaqa Jariya</span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold mb-6 leading-tight text-white">
+            Investeer in jouw <span class="text-waqf-gold">Hiernamaals</span>
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+            De Profeet &#xFDFA; zei: &quot;Wanneer de mens sterft, houden zijn daden op, behalve drie: een doorlopende liefdadigheid (Sadaqa Jariya), nuttige kennis of een oprecht kind dat voor hem smeekbeden verricht.&quot; (Sahih Muslim)
+          </p>
+          <p class="text-gray-400 mb-8">
+            Jouw donatie bekostigt de servers, domeinnamen en beveiliging van moskeewebsites in heel de Benelux. Elk gebed dat tijdig wordt verricht via deze sites, elke nieuwe moskeedonatie, wordt mede op jouw weegschaal geplaatst in-sha-Allah.
+          </p>
+        </div>
+
+        <div class="lg:w-1/2 w-full max-w-md mx-auto">
+          <DonationForm client:load />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Metrics -->
+  <section class="py-24 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-heading font-bold text-waqf-green-dark dark:text-white mb-4">De impact van jouw donatie</h2>
+        <p class="text-gray-600 dark:text-gray-400">Transparantie staat voorop. Dit is wat we kunnen bereiken met jouw steun.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <div class="text-waqf-gold text-4xl font-heading font-extrabold mb-4">&euro; 5 <span class="text-lg text-gray-500">/mnd</span></div>
+          <h3 class="text-xl font-bold text-waqf-green-dark dark:text-white mb-2">1 Moskee Online</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Dekt de maandelijkse server- en domeinkosten voor &eacute;&eacute;n gemiddelde moskeewebsite.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <div class="text-waqf-gold text-4xl font-heading font-extrabold mb-4">&euro; 25 <span class="text-lg text-gray-500">/mnd</span></div>
+          <h3 class="text-xl font-bold text-waqf-green-dark dark:text-white mb-2">Technisch Onderhoud</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Financiert de premium licenties, beveiligingsupdates en automatische back-ups.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <div class="text-waqf-gold text-4xl font-heading font-extrabold mb-4">&euro; 100 <span class="text-lg text-gray-500">/eenmalig</span></div>
+          <h3 class="text-xl font-bold text-waqf-green-dark dark:text-white mb-2">Nieuwe Lancering</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Bekostigt de volledige opstartfase en setupkosten voor een moskee die nieuw toetreedt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vrijwilliger CTA -->
+  <section class="py-24 bg-white dark:bg-gray-900">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-heading font-bold text-waqf-green-dark dark:text-white mb-6">Kan je niet financieel steunen?</h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-10">Doneer jouw kennis en tijd. We zijn altijd op zoek naar gepassioneerde moslims die willen meehelpen aan onze projecten.</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-10">
+        <span class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-semibold">Web Developers (React, Astro)</span>
+        <span class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-semibold">UI/UX Designers</span>
+        <span class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-semibold">Copywriters</span>
+        <span class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full text-sm font-semibold">SEO Specialisten</span>
+      </div>
+
+      <a href="/contact" class="inline-block border-2 border-waqf-green dark:border-waqf-gold text-waqf-green dark:text-waqf-gold hover:bg-waqf-green hover:text-white dark:hover:bg-waqf-gold dark:hover:text-gray-900 px-8 py-3 rounded-full font-bold text-lg transition">
+        Meld je aan als Vrijwilliger
+      </a>
+    </div>
+  </section>
+</Layout>

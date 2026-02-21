@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .line { fill: none; stroke: currentColor; stroke-width: 0.5; opacity: 0.3; }
+    </style>
+  </defs>
+  <!-- Islamic geometric star pattern -->
+  <g class="line" stroke="#1B4332">
+    <!-- Central 8-pointed star -->
+    <polygon points="100,20 120,80 180,80 130,120 150,180 100,140 50,180 70,120 20,80 80,80"/>
+    <!-- Inner details -->
+    <polygon points="100,50 110,85 145,85 115,110 125,145 100,125 75,145 85,110 55,85 90,85"/>
+    <!-- Corner stars (top-left) -->
+    <polygon points="0,0 10,30 40,30 15,50 25,80 0,60 -25,80 -15,50 -40,30 -10,30"/>
+    <!-- Corner stars (top-right) -->
+    <polygon points="200,0 210,30 240,30 215,50 225,80 200,60 175,80 185,50 160,30 190,30"/>
+    <!-- Corner stars (bottom-left) -->
+    <polygon points="0,200 10,230 40,230 15,250 25,280 0,260 -25,280 -15,250 -40,230 -10,230"/>
+    <!-- Corner stars (bottom-right) -->
+    <polygon points="200,200 210,230 240,230 215,250 225,280 200,260 175,280 185,250 160,230 190,230"/>
+    <!-- Connecting lines -->
+    <line x1="0" y1="100" x2="200" y2="100"/>
+    <line x1="100" y1="0" x2="100" y2="200"/>
+    <line x1="0" y1="0" x2="200" y2="200"/>
+    <line x1="200" y1="0" x2="0" y2="200"/>
+    <!-- Diamond connectors -->
+    <rect x="85" y="85" width="30" height="30" transform="rotate(45 100 100)" fill="none"/>
+  </g>
+</svg>
