@@ -24,7 +24,7 @@ export const prerender = false
 export const POST: APIRoute = async ({ request }) => {
   // 1. Authenticatie: check CRON_SECRET header
   const authHeader = request.headers.get('x-fleet-secret')
-  const cronSecret = import.meta.env.CRON_SECRET
+  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET
 
   if (!cronSecret || authHeader !== cronSecret) {
     return new Response(

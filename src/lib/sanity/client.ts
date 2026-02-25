@@ -27,7 +27,7 @@ export const sanityFreshClient = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  token: import.meta.env.SANITY_API_TOKEN,
+  token: import.meta.env.SANITY_API_TOKEN || process.env.SANITY_API_TOKEN,
 })
 
 /** Write client — voor fleet mutaties */
@@ -36,5 +36,5 @@ export const sanityWriteClient = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  token: import.meta.env.SANITY_WRITE_TOKEN,
+  token: import.meta.env.SANITY_WRITE_TOKEN || process.env.SANITY_WRITE_TOKEN,
 })
