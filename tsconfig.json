@@ -10,5 +10,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "astro.config.mjs"]
+  "include": ["src/**/*", "sanity/**/*", "sanity.config.ts", "sanity.cli.ts", "astro.config.mjs"]
 }
