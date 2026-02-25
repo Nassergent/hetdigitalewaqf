@@ -24,9 +24,10 @@ export const prerender = false
 export const POST: APIRoute = async ({ request }) => {
   // 1. Authenticatie: check CRON_SECRET header
   const authHeader = request.headers.get('x-fleet-secret')
-  const cronSecret = import.meta.env.CRON_SECRET || process.env.CRON_SECRET
+  const cronSecret = (process.env.CRON_SECRET ?? import.meta.env.CRON_SECRET ?? '').trim()
+  const secret = (authHeader ?? '').trim()
 
-  if (!cronSecret || authHeader !== cronSecret) {
+  if (!cronSecret || secret !== cronSecret) {
     return new Response(
       JSON.stringify({ error: 'Niet geautoriseerd' }),
       { status: 401, headers: { 'Content-Type': 'application/json' } },
