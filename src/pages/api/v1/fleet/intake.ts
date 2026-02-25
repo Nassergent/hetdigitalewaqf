@@ -24,7 +24,7 @@ export const prerender = false
 export const POST: APIRoute = async ({ request }) => {
   // 1. Authenticatie: check CRON_SECRET header
   const authHeader = request.headers.get('x-fleet-secret')
-  const cronSecret = (process.env.CRON_SECRET ?? import.meta.env.CRON_SECRET ?? '').trim()
+  const cronSecret = (process.env.CRON_SECRET ?? '').trim()
   const secret = (authHeader ?? '').trim()
 
   if (!cronSecret || secret !== cronSecret) {
@@ -58,13 +58,12 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     await updateMosqueFleetStatus(result.data)
     return new Response(
-      JSON.stringify({ ok: true, tenantId: result.data.tenantId }),
+      JSON.stringify({ ok: true }),
       { status: 200, headers: { 'Content-Type': 'application/json' } },
     )
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Onbekende fout'
+  } catch {
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'Interne fout' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } },
     )
   }
