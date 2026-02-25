@@ -1,0 +1,234 @@
+---
+export const prerender = false
+
+import Layout from '../layouts/Layout.astro'
+import { fetchAllMosques, fetchFleetStats } from '../lib/sanity/queries'
+import {
+  getConnectionStatus,
+  formatSyncAge,
+  calculateFleetHealth,
+  findOutdatedMosques,
+  type MosqueRecord,
+  type FleetStats,
+} from '../lib/logic/fleet'
+
+const LATEST_VERSION = 'v1.6.3'
+
+let mosques: MosqueRecord[] = []
+let stats: FleetStats = { total: 0, live: 0, bouwfase: 0, inactief: 0, deploySuccess: 0, deployFailed: 0 }
+let error = ''
+
+try {
+  ;[mosques, stats] = await Promise.all([fetchAllMosques(), fetchFleetStats()])
+} catch (e) {
+  error = e instanceof Error ? e.message : 'Kan data niet ophalen uit Sanity'
+}
+
+const healthPercent = calculateFleetHealth(stats)
+const outdated = findOutdatedMosques(mosques, LATEST_VERSION)
+
+const statusLabels: Record<string, string> = {
+  'in-afwachting': 'Wacht',
+  bouwfase: 'Bouw',
+  live: 'Live',
+  inactief: 'Inactief',
+}
+
+const statusColors: Record<string, string> = {
+  'in-afwachting': 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
+  bouwfase: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  live: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+  inactief: 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400',
+}
+
+const deployIcons: Record<string, { color: string; label: string }> = {
+  success: { color: 'text-emerald-500', label: 'Success' },
+  failed: { color: 'text-red-500', label: 'Failed' },
+  pending: { color: 'text-amber-500', label: 'Pending' },
+  rollback: { color: 'text-orange-500', label: 'Rollback' },
+}
+
+const connectionConfig: Record<string, { color: string; ring: string; label: string }> = {
+  live: { color: 'bg-emerald-500', ring: 'ring-emerald-500/30', label: 'Live' },
+  recent: { color: 'bg-amber-500', ring: 'ring-amber-500/30', label: 'Recent' },
+  offline: { color: 'bg-gray-400', ring: 'ring-gray-400/20', label: 'Offline' },
+}
+---
+
+<Layout title="Fleet Dashboard | WaqfOS Hub" description="Fleet monitoring voor alle aangesloten moskeeën">
+
+  <section class="bg-waqf-green-dark text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <p class="text-waqf-gold font-semibold text-sm tracking-wider uppercase mb-1">WaqfOS Fleet Monitor</p>
+          <h1 class="text-3xl md:text-4xl font-heading font-extrabold text-white">Dashboard</h1>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-300">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Template: {LATEST_VERSION}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+        <div class="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Totaal</p>
+          <p class="text-3xl font-heading font-extrabold text-waqf-green-dark dark:text-white mt-1">{stats.total}</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Live</p>
+          <p class="text-3xl font-heading font-extrabold text-emerald-600 mt-1">{stats.live}</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Bouwfase</p>
+          <p class="text-3xl font-heading font-extrabold text-amber-600 mt-1">{stats.bouwfase}</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Inactief</p>
+          <p class="text-3xl font-heading font-extrabold text-red-500 mt-1">{stats.inactief}</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Fleet Health</p>
+          <p class={`text-3xl font-heading font-extrabold mt-1 ${healthPercent >= 80 ? 'text-emerald-600' : healthPercent >= 50 ? 'text-amber-600' : 'text-red-500'}`}>{healthPercent}%</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Verouderd</p>
+          <p class={`text-3xl font-heading font-extrabold mt-1 ${outdated.length > 0 ? 'text-orange-500' : 'text-emerald-600'}`}>{outdated.length}</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {error && (
+        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 mb-6">
+          <p class="text-red-700 dark:text-red-400 text-sm font-medium">Fout: {error}</p>
+        </div>
+      )}
+
+      {mosques.length === 0 && !error && (
+        <div class="text-center py-16">
+          <svg class="mx-auto w-16 h-16 text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          <p class="text-gray-500 dark:text-gray-400 text-lg">Nog geen moskeeën in de fleet.</p>
+          <p class="text-gray-400 dark:text-gray-500 text-sm mt-1">Voeg je eerste moskee toe via <a href="https://hetdigitalewaqf.sanity.studio/" class="text-waqf-gold hover:underline" target="_blank">Sanity Studio</a>.</p>
+        </div>
+      )}
+
+      {mosques.length > 0 && (
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b-2 border-waqf-green-dark dark:border-waqf-gold text-left">
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Verbinding</th>
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Moskee</th>
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Status</th>
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Versie</th>
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Deploy</th>
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Laatste Sync</th>
+                <th class="py-3 px-4 font-heading font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Link</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+              {mosques.map((mosque: MosqueRecord) => {
+                const conn = getConnectionStatus(mosque.lastSyncDate)
+                const connCfg = connectionConfig[conn]
+                const deploy = deployIcons[mosque.deploymentStatus] || deployIcons.pending
+                const isOutdated = mosque.currentVersion && mosque.currentVersion !== LATEST_VERSION
+                return (
+                  <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    {/* Verbinding bolletje */}
+                    <td class="py-3 px-4">
+                      <div class="flex items-center gap-2">
+                        <span class={`inline-block w-3 h-3 rounded-full ${connCfg.color} ring-4 ${connCfg.ring}`} />
+                        <span class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline">{connCfg.label}</span>
+                      </div>
+                    </td>
+                    {/* Naam + Tenant ID */}
+                    <td class="py-3 px-4">
+                      <p class="font-semibold text-gray-900 dark:text-white">{mosque.name || 'Naamloos'}</p>
+                      {mosque.tenantId && (
+                        <p class="text-xs text-gray-400 dark:text-gray-500 font-mono">{mosque.tenantId}</p>
+                      )}
+                    </td>
+                    {/* Status badge */}
+                    <td class="py-3 px-4">
+                      <span class={`inline-block px-2 py-0.5 text-xs font-bold uppercase tracking-wider ${statusColors[mosque.status] || statusColors['in-afwachting']}`}>
+                        {statusLabels[mosque.status] || mosque.status || '—'}
+                      </span>
+                    </td>
+                    {/* Versie */}
+                    <td class="py-3 px-4">
+                      <span class={`font-mono text-xs ${isOutdated ? 'text-orange-500 font-bold' : 'text-gray-600 dark:text-gray-300'}`}>
+                        {mosque.currentVersion || '—'}
+                      </span>
+                      {isOutdated && (
+                        <span class="ml-1 text-[10px] text-orange-500" title={`Verwacht: ${LATEST_VERSION}`}>⬆</span>
+                      )}
+                    </td>
+                    {/* Deploy status */}
+                    <td class="py-3 px-4">
+                      <span class={`text-xs font-semibold ${deploy.color}`}>{deploy.label}</span>
+                    </td>
+                    {/* Laatste sync */}
+                    <td class="py-3 px-4">
+                      <span class="text-xs text-gray-500 dark:text-gray-400">{formatSyncAge(mosque.lastSyncDate)}</span>
+                    </td>
+                    {/* Vercel link */}
+                    <td class="py-3 px-4">
+                      {mosque.vercelUrl ? (
+                        <a href={mosque.vercelUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-waqf-green dark:text-waqf-gold hover:underline font-semibold">
+                          Bekijk
+                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                      ) : (
+                        <span class="text-xs text-gray-300 dark:text-gray-600">—</span>
+                      )}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Legenda */}
+      <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+        <p class="text-xs text-gray-400 dark:text-gray-500 font-semibold uppercase tracking-wider mb-3">Legenda</p>
+        <div class="flex flex-wrap gap-6 text-xs text-gray-500 dark:text-gray-400">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-500/30" />
+            Live — sync &lt; 10 min
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-amber-500/30" />
+            Recent — sync &lt; 24 uur
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-gray-400 ring-4 ring-gray-400/20" />
+            Offline — geen verbinding
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-orange-500 font-mono font-bold">v0.0.0 ⬆</span>
+            Verouderde versie
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

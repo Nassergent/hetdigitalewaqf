@@ -13,6 +13,33 @@ export interface MosqueRecord {
   currentVersion: string
   deploymentStatus: string
   lastSyncDate: string | null
+  vercelUrl?: string
+}
+
+export type ConnectionStatus = 'live' | 'recent' | 'offline'
+
+/** Bepaal connection status op basis van lastSyncDate */
+export function getConnectionStatus(lastSyncDate: string | null): ConnectionStatus {
+  if (!lastSyncDate) return 'offline'
+  const msAgo = Date.now() - new Date(lastSyncDate).getTime()
+  const minutesAgo = msAgo / (1000 * 60)
+  if (minutesAgo < 10) return 'live'
+  const hoursAgo = minutesAgo / 60
+  if (hoursAgo < 24) return 'recent'
+  return 'offline'
+}
+
+/** Format lastSyncDate naar leesbare tekst */
+export function formatSyncAge(lastSyncDate: string | null): string {
+  if (!lastSyncDate) return 'Nooit'
+  const msAgo = Date.now() - new Date(lastSyncDate).getTime()
+  const minutes = Math.floor(msAgo / (1000 * 60))
+  if (minutes < 1) return 'Zojuist'
+  if (minutes < 60) return `${minutes} min geleden`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours} uur geleden`
+  const days = Math.floor(hours / 24)
+  return `${days} dag${days > 1 ? 'en' : ''} geleden`
 }
 
 export interface FleetStats {

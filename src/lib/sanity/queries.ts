@@ -17,7 +17,8 @@ const MOSQUES_LIST = `*[_type == "customer"] | order(name asc) {
   currentVersion,
   deploymentStatus,
   lastSyncDate,
-  onboardingDate
+  onboardingDate,
+  vercelUrl
 }`
 
 const MOSQUE_BY_TENANT_ID = `*[_type == "customer" && tenantId == $tenantId][0]`
