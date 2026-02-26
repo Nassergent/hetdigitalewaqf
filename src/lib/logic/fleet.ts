@@ -1,5 +1,5 @@
 /**
- * WaqfOS Fleet Hub — Fleet Business Logic
+ * UmmahOS Fleet Hub — Fleet Business Logic
  *
  * Pure functies. Geen side effects, geen imports van services.
  * Input in, output uit.

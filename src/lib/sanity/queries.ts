@@ -1,5 +1,5 @@
 /**
- * WaqfOS Fleet Hub — GROQ Queries
+ * UmmahOS Fleet Hub — GROQ Queries
  *
  * ALLE Sanity queries staan hier. Nergens anders.
  * Dit is de enige plek waar GROQ geschreven wordt.

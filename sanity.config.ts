@@ -4,7 +4,7 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 
 // ============================================
-// WaqfOS Fleet Hub — Mosque Customer Schema
+// UmmahOS Fleet Hub — Mosque Customer Schema
 // v1.6.3 Enterprise Standard
 // ============================================
 

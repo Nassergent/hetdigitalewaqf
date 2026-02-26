@@ -1,5 +1,5 @@
 /**
- * WaqfOS Fleet Hub — Fleet Service
+ * UmmahOS Fleet Hub — Fleet Service
  *
  * Side effects: Sanity writes, externe API calls.
  * Mag logic importeren, maar UI importeert NOOIT services.

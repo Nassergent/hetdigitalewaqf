@@ -1,5 +1,5 @@
 /**
- * WaqfOS Fleet Hub — Sanity Client
+ * UmmahOS Fleet Hub — Sanity Client
  *
  * Drie clients voor verschillende use-cases:
  * - cdn: Gecachte reads (lijsten, overzichten)

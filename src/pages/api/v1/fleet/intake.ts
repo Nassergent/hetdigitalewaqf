@@ -1,5 +1,5 @@
 /**
- * WaqfOS Fleet Hub — Fleet Intake Endpoint
+ * UmmahOS Fleet Hub — Fleet Intake Endpoint
  *
  * POST /api/v1/fleet/intake
  *
