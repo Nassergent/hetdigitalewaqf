@@ -5,6 +5,7 @@ const navLinks = [
   { name: 'Over Ons', href: '/over-ons' },
   { name: 'Diensten', href: '/diensten' },
   { name: 'Moskeeën', href: '/moskeeen' },
+  { name: 'Governance', href: '/governance' },
   { name: 'Steun Ons', href: '/steun-ons' },
   { name: 'Contact', href: '/contact' },
 ];
