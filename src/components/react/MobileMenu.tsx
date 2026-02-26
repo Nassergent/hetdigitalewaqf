@@ -70,7 +70,7 @@ export default function MobileMenu() {
               href="/contact"
               className="w-full text-center bg-[#1B4332] hover:bg-[#2D6A4F] text-white px-6 py-3 rounded-full font-bold text-lg transition shadow-lg"
             >
-              Vraag Website Aan
+              Plan een Intake
             </a>
           </div>
         </nav>
