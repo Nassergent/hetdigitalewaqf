@@ -5,7 +5,7 @@ export default defineCliConfig({
     projectId: 'dogai0iz',
     dataset: 'production',
   },
-  studioHost: 'hetdigitalewaqf',
+  studioHost: 'ummah-be',
   deployment: {
     appId: 'fmcpzqwrb5779ajxob5f9r7k',
   },

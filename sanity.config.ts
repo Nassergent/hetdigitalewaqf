@@ -260,8 +260,8 @@ const customer = defineType({
 // ============================================
 
 export default defineConfig({
-  name: 'het-digitale-waqf',
-  title: 'WaqfOS Fleet Hub',
+  name: 'ummah-be',
+  title: 'Ummah.be | Fleet Hub',
   projectId: 'dogai0iz',
   dataset: 'production',
   plugins: [structureTool(), visionTool()],

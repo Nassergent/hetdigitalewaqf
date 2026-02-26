@@ -29,7 +29,7 @@ export default function MobileMenu() {
       {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-[#081C15] dark:text-white focus:outline-none"
+        className="p-2 text-[#0F3640] dark:text-white focus:outline-none"
         aria-label="Toggle menu"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@ export default function MobileMenu() {
             <a
               key={link.name}
               href={link.href}
-              className="text-2xl font-semibold text-[#081C15] dark:text-white hover:text-[#D4A017] dark:hover:text-[#D4A017] transition-colors"
+              className="text-2xl font-semibold text-[#0F3640] dark:text-white hover:text-[#C9A983] dark:hover:text-[#C9A983] transition-colors"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               onClick={() => setIsOpen(false)}
             >
@@ -62,13 +62,13 @@ export default function MobileMenu() {
           <div className="pt-6 mt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-4">
             <a
               href="/steun-ons"
-              className="w-full text-center bg-transparent border-2 border-[#D4A017] text-[#D4A017] px-6 py-3 rounded-full font-bold text-lg transition"
+              className="w-full text-center bg-transparent border-2 border-[#C9A983] text-[#C9A983] px-6 py-3 rounded-full font-bold text-lg transition"
             >
               Steun Ons
             </a>
             <a
               href="/contact"
-              className="w-full text-center bg-[#1B4332] hover:bg-[#2D6A4F] text-white px-6 py-3 rounded-full font-bold text-lg transition shadow-lg"
+              className="w-full text-center bg-[#1D5C6B] hover:bg-[#267A8A] text-white px-6 py-3 rounded-full font-bold text-lg transition shadow-lg"
             >
               Plan een Intake
             </a>
