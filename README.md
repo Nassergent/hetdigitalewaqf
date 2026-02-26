@@ -1,6 +1,6 @@
-# Het Digitale Waqf VZW
+# Ummah.be
 
-Een non-profit initiatief dat gratis en betaalbare, hoogwaardige websites bouwt voor moskeeën in België en Nederland. Gebouwd als **Sadaqa Jariya** (doorlopende liefdadigheid).
+De digitale fundering voor de Belgische Ummah. Een non-profit initiatief dat professionele digitale infrastructuur bouwt voor moskeeën in België en Nederland. Gebouwd als **Sadaqa Jariya** (doorlopende liefdadigheid). Een initiatief van Het Digitale Waqf VZW.
 
 ## Tech Stack
 
@@ -108,4 +108,4 @@ Jouw code kan in-sha-Allah een Sadaqa Jariya zijn.
 
 ## Licentie
 
-MIT License — De branding en naam "Het Digitale Waqf" zijn eigendom van de VZW.
+MIT License — De branding en naam "Ummah.be" zijn eigendom van Het Digitale Waqf VZW.
