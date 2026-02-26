@@ -8,24 +8,27 @@ import {
   formatSyncAge,
   calculateFleetHealth,
   findOutdatedMosques,
+  getMasterVersion,
+  separateMaster,
   type MosqueRecord,
   type FleetStats,
 } from '../lib/logic/fleet'
 
-const LATEST_VERSION = 'v1.6.3'
-
-let mosques: MosqueRecord[] = []
+let allMosques: MosqueRecord[] = []
 let stats: FleetStats = { total: 0, live: 0, bouwfase: 0, inactief: 0, deploySuccess: 0, deployFailed: 0 }
 let error = ''
 
 try {
-  ;[mosques, stats] = await Promise.all([fetchAllMosques(), fetchFleetStats()])
+  ;[allMosques, stats] = await Promise.all([fetchAllMosques(), fetchFleetStats()])
 } catch (e) {
   error = e instanceof Error ? e.message : 'Kan data niet ophalen uit Sanity'
 }
 
+// Master is het ijkpunt — versie wordt dynamisch bepaald
+const { master, fleet: mosques } = separateMaster(allMosques)
+const LATEST_VERSION = getMasterVersion(allMosques, 'v1.7.1')
 const healthPercent = calculateFleetHealth(stats)
-const outdated = findOutdatedMosques(mosques, LATEST_VERSION)
+const outdated = findOutdatedMosques(allMosques, LATEST_VERSION)
 
 const statusLabels: Record<string, string> = {
   'in-afwachting': 'Wacht',
@@ -142,6 +145,56 @@ const connectionConfig: Record<string, { color: string; ring: string; label: str
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+              {/* ── MASTER TEMPLATE — Eerste rij, gouden accent ── */}
+              {master && (() => {
+                const mConn = getConnectionStatus(master.lastSyncDate)
+                const mConnCfg = connectionConfig[mConn]
+                const mDeploy = deployIcons[master.deploymentStatus] || deployIcons.pending
+                return (
+                  <tr class="bg-waqf-gold/5 border-l-4 border-l-waqf-gold dark:bg-waqf-gold/10">
+                    <td class="py-3 px-4">
+                      <div class="flex items-center gap-2">
+                        <span class={`inline-block w-3 h-3 rounded-full ${mConnCfg.color} ring-4 ${mConnCfg.ring}`} />
+                        <span class="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline">{mConnCfg.label}</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-4">
+                      <p class="font-bold text-waqf-green-dark dark:text-waqf-gold">⚙ {master.name || 'Moeder Template'}</p>
+                      <p class="text-xs text-waqf-gold/70 font-mono">{master.tenantId}</p>
+                    </td>
+                    <td class="py-3 px-4">
+                      <span class="inline-block px-2 py-0.5 text-xs font-bold uppercase tracking-wider bg-waqf-gold/20 text-waqf-gold">
+                        Master
+                      </span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <span class="font-mono text-xs font-bold text-waqf-green-dark dark:text-waqf-gold">{master.currentVersion || '—'}</span>
+                      <span class="ml-1 text-[10px] text-waqf-gold">★</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <span class={`text-xs font-semibold ${mDeploy.color}`}>{mDeploy.label}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <span class="text-xs text-gray-500 dark:text-gray-400">{formatSyncAge(master.lastSyncDate)}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      {master.vercelUrl ? (
+                        <a href={master.vercelUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-waqf-green dark:text-waqf-gold hover:underline font-semibold">
+                          Bekijk
+                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                      ) : (
+                        <span class="text-xs text-gray-300 dark:text-gray-600">—</span>
+                      )}
+                    </td>
+                  </tr>
+                )
+              })()}
+
+              {/* ── Divider tussen master en fleet ── */}
+              <tr class="border-t-2 border-waqf-gold/30"><td colspan="7" class="py-0"></td></tr>
+
+              {/* ── Fleet moskeeën ── */}
               {mosques.map((mosque: MosqueRecord) => {
                 const conn = getConnectionStatus(mosque.lastSyncDate)
                 const connCfg = connectionConfig[conn]
@@ -169,13 +222,13 @@ const connectionConfig: Record<string, { color: string; ring: string; label: str
                         {statusLabels[mosque.status] || mosque.status || '—'}
                       </span>
                     </td>
-                    {/* Versie */}
+                    {/* Versie — ROOD als verouderd */}
                     <td class="py-3 px-4">
-                      <span class={`font-mono text-xs ${isOutdated ? 'text-orange-500 font-bold' : 'text-gray-600 dark:text-gray-300'}`}>
+                      <span class={`font-mono text-xs ${isOutdated ? 'text-red-500 font-bold' : 'text-gray-600 dark:text-gray-300'}`}>
                         {mosque.currentVersion || '—'}
                       </span>
                       {isOutdated && (
-                        <span class="ml-1 text-[10px] text-orange-500" title={`Verwacht: ${LATEST_VERSION}`}>⬆</span>
+                        <span class="ml-1 text-[10px] text-red-500 font-bold" title={`Verwacht: ${LATEST_VERSION}`}>!</span>
                       )}
                     </td>
                     {/* Deploy status */}
@@ -222,7 +275,11 @@ const connectionConfig: Record<string, { color: string; ring: string; label: str
             Offline — geen verbinding
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-orange-500 font-mono font-bold">v0.0.0 ⬆</span>
+            <span class="font-mono font-bold text-waqf-green-dark dark:text-waqf-gold">v1.7.1 ★</span>
+            Master (ijkpunt)
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-red-500 font-mono font-bold">v0.0.0 !</span>
             Verouderde versie
           </div>
         </div>

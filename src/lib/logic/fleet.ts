@@ -51,13 +51,26 @@ export interface FleetStats {
   deployFailed: number
 }
 
+/** Haal de master-versie op uit de mosques-lijst (waqf-master is het ijkpunt) */
+export function getMasterVersion(mosques: MosqueRecord[], fallback: string = 'v0.0.0'): string {
+  const master = mosques.find((m) => m.tenantId === 'waqf-master')
+  return master?.currentVersion || fallback
+}
+
+/** Scheid master van fleet-instanties */
+export function separateMaster(mosques: MosqueRecord[]): { master: MosqueRecord | null; fleet: MosqueRecord[] } {
+  const master = mosques.find((m) => m.tenantId === 'waqf-master') || null
+  const fleet = mosques.filter((m) => m.tenantId !== 'waqf-master')
+  return { master, fleet }
+}
+
 /** Bereken welke moskeeën een verouderde versie draaien */
 export function findOutdatedMosques(
   mosques: MosqueRecord[],
   latestVersion: string,
 ): MosqueRecord[] {
   return mosques.filter(
-    (m) => m.currentVersion !== latestVersion && m.status === 'live',
+    (m) => m.tenantId !== 'waqf-master' && m.currentVersion !== latestVersion && m.status === 'live',
   )
 }
 
