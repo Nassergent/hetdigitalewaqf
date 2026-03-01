@@ -10,7 +10,7 @@ import type { IntakePayload } from '../lib/logic/fleet'
 
 /** Update de fleet-status van een moskee na een intake-rapport */
 export async function updateMosqueFleetStatus(payload: IntakePayload) {
-  const { tenantId, version, status, timestamp } = payload
+  const { tenantId, version, status, reason, timestamp } = payload
 
   // Zoek de moskee op tenantId
   const mosque = await sanityWriteClient.fetch(
@@ -28,6 +28,7 @@ export async function updateMosqueFleetStatus(payload: IntakePayload) {
     .set({
       currentVersion: version,
       deploymentStatus: status,
+      ...(reason && { deploymentReason: reason }),
       lastSyncDate: timestamp,
     })
     .commit()

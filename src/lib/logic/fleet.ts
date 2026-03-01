@@ -106,8 +106,9 @@ export function validateIntakePayload(
     return { valid: false, error: 'version is verplicht (string)' }
   }
 
-  if (!p.status || typeof p.status !== 'string') {
-    return { valid: false, error: 'status is verplicht (string)' }
+  const validStatuses = ['success', 'failed']
+  if (!p.status || typeof p.status !== 'string' || !validStatuses.includes(p.status)) {
+    return { valid: false, error: `status moet "success" of "failed" zijn` }
   }
 
   return {
@@ -116,6 +117,7 @@ export function validateIntakePayload(
       tenantId: p.tenantId,
       version: p.version,
       status: p.status as 'success' | 'failed',
+      reason: typeof p.reason === 'string' ? p.reason : null,
       timestamp: typeof p.timestamp === 'string' ? p.timestamp : new Date().toISOString(),
     },
   }
@@ -125,5 +127,6 @@ export interface IntakePayload {
   tenantId: string
   version: string
   status: 'success' | 'failed'
+  reason: string | null
   timestamp: string
 }
