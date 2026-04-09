@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Historische waqf impact stories — 1400 jaar bewijs
+const stories = [
+  {
+    periode: '7e eeuw — Medina',
+    titel: "De put van Uthman (Biʾr Rumah)",
+    ondertitel: "Een waterput die 1400 jaar blijft geven",
+    icoon: '💧',
+    kleur: 'var(--color-clarity)',
+    verhaal: `Toen de Profeet ﷺ en zijn metgezellen naar Medina emigreerden, was er één grote waterput — Biʾr Rumah — die eigendom was van een Joodse handelaar die het water voor veel geld verkocht. Uthman ibn Affan (raḍiya Allāhu ʿanhu) kocht de put en schonk hem als waqf voor de hele gemeenschap. Vanaf dat moment kregen alle moslims gratis water. Volgens historische bronnen wordt deze put tot op vandaag nog beheerd als waqf — en voedt hij nog steeds akkers in de omliggende regio, die inkomsten genereren voor behoeftigen. Eén gift, 1400 jaar impact.`,
+    impact: '1400 jaar',
+    begunstigden: 'Miljoenen mensen',
+  },
+  {
+    periode: '7e eeuw — Khaybar',
+    titel: "Het land van Umar ibn al-Khattab",
+    ondertitel: "De allereerste waqf in de islamitische geschiedenis",
+    icoon: '🌾',
+    kleur: 'var(--color-growth)',
+    verhaal: `Umar ibn al-Khattab (raḍiya Allāhu ʿanhu) verkreeg een stuk vruchtbare grond in Khaybar. Hij ging naar de Profeet ﷺ en vroeg: "O Boodschapper van Allah, ik heb een bezit dat waardevoller is dan enig ander dat ik ooit had. Wat moet ik ermee doen?" De Profeet ﷺ antwoordde: "Als je wilt, houd het kapitaal vast en geef de opbrengsten in liefdadigheid." Umar schonk het land als waqf, met de voorwaarde dat het nooit zou worden verkocht, geërfd of gegeven. De opbrengsten gingen naar de armen, reizigers en slaven die zich wilden vrijkopen. Deze ene handeling legde de fiqh-basis voor de hele waqf-traditie.`,
+    impact: '>1400 jaar model',
+    begunstigden: 'Hele moslimgemeenschap',
+  },
+  {
+    periode: '10e eeuw — Cairo',
+    titel: "Al-Azhar Universiteit",
+    ondertitel: "De oudste nog werkende universiteit ter wereld",
+    icoon: '📚',
+    kleur: 'var(--color-capital)',
+    verhaal: `In 972 CE werd de Al-Azhar moskee in Cairo gesticht en al snel uitgebreid tot een universiteit. Door de eeuwen heen werd ze ondersteund door een uitgebreid waqf-systeem: landerijen, winkels, ovens en zelfs hele dorpen werden als waqf vastgelegd waarvan de opbrengsten naar de universiteit gingen. Docenten, studenten, boeken, maaltijden — alles werd betaald uit waqf-rendementen. Tijdens haar 1050+ jaar bestaan heeft Al-Azhar <em>honderdduizenden</em> geleerden, juristen en leraren gevormd die de islamitische wereld hebben vormgegeven. Nog altijd studeren hier moslims uit meer dan 100 landen — grotendeels gefinancierd door de vruchten van waqfs die duizend jaar geleden zijn ingesteld.`,
+    impact: '1050+ jaar',
+    begunstigden: 'Honderdduizenden studenten',
+  },
+  {
+    periode: '16e eeuw — Istanbul',
+    titel: "Het Süleymaniye complex",
+    ondertitel: "Een moskee, ziekenhuis, keukens en school in één waqf",
+    icoon: '🕌',
+    kleur: 'var(--color-clarity)',
+    verhaal: `Sultan Süleyman de Grote liet in 1550-1557 het Süleymaniye complex bouwen in Istanbul. Maar het was veel meer dan een moskee. Het waqf omvatte: een ziekenhuis (bimaristan) waar arme mensen gratis werden behandeld, publieke keukens (imaret) die duizenden maaltijden per dag uitdeelden aan behoeftigen en reizigers, een madrasa (school) met vrij onderwijs, een bibliotheek met duizenden boeken, en zelfs openbare baden. De hele infrastructuur werd gefinancierd door inkomsten uit hele dorpen, winkels en landerijen die als waqf waren vastgelegd. Vijf eeuwen later functioneert het complex nog steeds deels als waqf en blijft het de stad dienen.`,
+    impact: '470+ jaar',
+    begunstigden: 'Miljoenen Istanbullers',
+  },
+  {
+    periode: '16e-19e eeuw — Ottomaanse Rijk',
+    titel: "Het Ottomaanse waqf-netwerk",
+    ondertitel: "Toen 75% van alle landbouwgrond een waqf was",
+    icoon: '🗺️',
+    kleur: 'var(--color-growth)',
+    verhaal: `Op het hoogtepunt van het Ottomaanse Rijk werd naar schatting <strong>driekwart van alle landbouwgrond</strong> in het rijk beheerd als waqf. Dit financierde een infrastructuur die vandaag ongelooflijk klinkt: tienduizenden moskeeën, scholen, ziekenhuizen, karavanserais (gratis onderkomens voor reizigers), publieke fonteinen, bibliotheken en liefdadigheidskeukens. Historicus Murat Çizakça schreef er een heel boek over. Er bestonden zelfs gespecialiseerde waqfs: sommige betaalden voor het vrijkopen van krijgsgevangenen, andere voor bruidschat aan arme meisjes, weer andere voor voedsel voor straatdieren. Het Ottomaanse waqf-systeem is tot vandaag het grootste georganiseerde liefdadigheidsnetwerk dat ooit heeft bestaan.`,
+    impact: '400+ jaar',
+    begunstigden: 'Tientallen miljoenen',
+  },
+  {
+    periode: '19e eeuw — India',
+    titel: "Cash waqfs en onderwijs voor meisjes",
+    ondertitel: "Waqf-fondsen die de weg openden voor moslimvrouwen",
+    icoon: '🎓',
+    kleur: 'var(--color-zakat)',
+    verhaal: `In het 19e-eeuwse India werden nieuwe vormen van waqf ontwikkeld: <em>cash waqfs</em> waar het kapitaal geld was in plaats van land. Een van de bekendste voorbeelden is het waqf dat Sir Syed Ahmad Khan hielp oprichten voor het Mohammedan Anglo-Oriental College (nu Aligarh Muslim University). Maar minstens even opmerkelijk waren de waqfs die moslimvrouwen in Hyderabad en Lucknow oprichtten voor <strong>onderwijs voor meisjes</strong>. In een tijd waarin dit controversieel was, legden deze vrouwen hun juwelen, land en geld vast als waqf — om ervoor te zorgen dat toekomstige generaties moslimmeisjes naar school konden. Hun namen zijn grotendeels vergeten, maar hun impact bestaat nog in instituten die vandaag duizenden studenten opleiden.`,
+    impact: '150+ jaar',
+    begunstigden: 'Duizenden studenten',
+  },
+  {
+    periode: '20e-21e eeuw — Wereldwijd',
+    titel: "Moderne waqf-heropleving",
+    ondertitel: "Van Koeweit tot Maleisië tot Europa",
+    icoon: '🌍',
+    kleur: 'var(--color-capital)',
+    verhaal: `Na een periode van achteruitgang in de 20e eeuw is het waqf-concept aan een wereldwijde heropleving bezig. Koeweit heeft een <em>Kuwait Awqaf Public Foundation</em> die honderden miljoenen dollars beheert. Maleisië heeft een volledig gereglementeerd waqf-systeem. In het Verenigd Koninkrijk beheert het <em>National Zakat Foundation</em> moderne cash waqfs. In Singapore is er <em>Warees</em>, dat vastgoed-waqfs commercieel exploiteert met de opbrengsten voor de gemeenschap. Ondertussen bouwen groepen moslims in Duitsland, Nederland en nu België aan hun eigen waqfs. De 1400 jaar oude traditie past perfect bij moderne doelen: onderwijs, mentorschap, gemeenschapsopbouw. Het enige wat veranderde is de vorm. De essentie blijft: kapitaal dat nooit wordt aangeraakt, en vruchten die generaties lang blijven geven.`,
+    impact: 'Vandaag',
+    begunstigden: 'De volgende generaties',
+  },
+];
+---
+
+<Layout title="Verhalen van de Waqf — Ummah.be" description="1400 jaar aan bewijs dat waqf werkt. Van Uthman's waterput in Medina tot Al-Azhar Universiteit tot het moderne Koeweit — verhalen die de kracht van sadaqah jariyah tonen.">
+
+  <!-- HERO -->
+  <section class="py-20" style="background: var(--color-capital);">
+    <div class="container text-center max-w-[850px]">
+      <h1 class="text-white mb-4 fade-up">1400 jaar aan verhalen</h1>
+      <p class="text-white/80 text-lg leading-relaxed fade-up delay-1">
+        Wat wij nu willen bouwen, hebben moslims al 14 eeuwen gebouwd. De geschiedenis is vol van waqfs die generaties lang mensen hebben gediend. Hier zijn hun verhalen — als bewijs dat dit werkt.
+      </p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="py-10" style="background: rgba(27,94,63,0.05); border-bottom: 1px solid var(--color-border);">
+    <div class="container max-w-[800px] text-center">
+      <p class="text-base" style="color: var(--color-text);">
+        Een waqf hoeft niet te wachten op zijn "eerste verhaal" — <strong>de verhalen bestaan al</strong>, en ze zijn duizend jaar oud. Van de waterput van Uthman in Medina tot het Ottomaanse waqf-netwerk tot de moderne waqfs van vandaag: elke generatie moslims heeft bewezen dat deze traditie werkt.
+      </p>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  {stories.map((story, i) => {
+    const isEven = i % 2 === 0;
+    return (
+      <section class="section" style={isEven ? '' : 'background: white;'}>
+        <div class="container max-w-[900px]">
+          <div class="flex flex-col lg:flex-row gap-8 items-start fade-up">
+
+            <!-- Icon + metadata kolom -->
+            <div class="w-full lg:w-[240px] shrink-0">
+              <div class="card text-center" style={`border-left: 4px solid ${story.kleur};`}>
+                <div class="text-6xl mb-4">{story.icoon}</div>
+                <p class="text-xs font-semibold uppercase tracking-wider mb-1" style={`color: ${story.kleur};`}>
+                  {story.periode}
+                </p>
+                <div class="mt-4 pt-4 border-t" style="border-color: var(--color-border);">
+                  <p class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-text-light);">Impact</p>
+                  <p class="text-lg font-heading font-bold" style={`color: ${story.kleur};`}>{story.impact}</p>
+                </div>
+                <div class="mt-3">
+                  <p class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-text-light);">Begunstigden</p>
+                  <p class="text-sm font-semibold" style="color: var(--color-text);">{story.begunstigden}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Verhaal kolom -->
+            <div class="flex-1">
+              <h2 class="mb-2" style={`color: ${story.kleur};`}>{story.titel}</h2>
+              <p class="text-lg italic mb-6" style="color: var(--color-text-light);">{story.ondertitel}</p>
+              <p class="text-base leading-relaxed" style="color: var(--color-text);" set:html={story.verhaal}></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- CONCLUSIE -->
+  <section class="section" style="background: var(--color-peace);">
+    <div class="container max-w-[800px] text-center">
+      <h2 class="mb-6 fade-up">Wat verbindt al deze verhalen?</h2>
+      <p class="text-lg leading-relaxed mb-6 fade-up delay-1" style="color: var(--color-text);">
+        Eén ding: <strong>iemand besloot ooit iets te schenken dat nooit meer teruggenomen zou worden</strong>. Uthman met zijn waterput. Umar met zijn land. Sultan Süleyman met zijn complex. Onbekende vrouwen in Hyderabad met hun juwelen voor meisjesonderwijs.
+      </p>
+      <p class="text-lg leading-relaxed mb-6 fade-up delay-2" style="color: var(--color-text);">
+        Zij zagen hun gift niet als verlies. Ze zagen het als een <em>investering in de eeuwigheid</em> — in Allah's beloning, en in generaties die zij nooit zouden ontmoeten.
+      </p>
+      <p class="text-lg leading-relaxed font-semibold fade-up delay-3" style="color: var(--color-capital);">
+        Ummah.be Waqf is het volgende hoofdstuk in dit verhaal. Jouw bijdrage, hoe klein ook, wordt een nieuwe schakel in een keten die 1400 jaar geleden begon.
+      </p>
+    </div>
+  </section>
+
+  <!-- HADITH -->
+  <section class="section" style="background: white;">
+    <div class="container max-w-[800px]">
+      <div class="card card-capital text-center fade-up">
+        <p class="font-arabic text-2xl mb-4" lang="ar" dir="rtl" style="color: var(--color-capital);">
+          إِذَا مَاتَ الْإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ
+        </p>
+        <p class="italic text-lg mb-4" style="color: var(--color-capital);">
+          "Wanneer een mens sterft, houden zijn daden op, behalve drie: een doorlopende liefdadigheid (sadaqah jariyah), kennis waar men profijt van heeft, en een rechtschapen kind dat voor hem bidt."
+        </p>
+        <p class="text-sm" style="color: var(--color-text-light);">
+          — Sahih Muslim 1631, overgeleverd door Abu Huraira (raḍiya Allāhu ʿanhu)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20" style="background: var(--color-capital);">
+    <div class="container text-center max-w-[700px]">
+      <h2 class="text-white mb-4 fade-up">Word een schakel in dit verhaal</h2>
+      <p class="text-white/80 text-lg mb-8 fade-up delay-1">
+        Duizend jaar na jou kan iemand profiteren van wat jij vandaag begint.
+      </p>
+      <div class="flex gap-4 justify-center flex-wrap fade-up delay-2">
+        <a href="/steun-ons" class="btn" style="background: var(--color-gold); color: var(--color-capital-dark);">Start jouw bijdrage</a>
+        <a href="/nalatenschap" class="btn btn-outline" style="border-color: white; color: white;">Via nalatenschap</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -44,11 +44,49 @@ const jaarlijkseOpbrengst = Math.round(minWaqf * rendement / 100);
 
   <!-- WAT IS EEN WAQF -->
   <section class="section">
-    <div class="container text-center">
+    <div class="container text-center max-w-[800px]">
       <h2 class="mb-6 fade-up">{waqfUitlegTitle}</h2>
-      <p class="text-lg max-w-[700px] mx-auto mb-10 fade-up delay-1" style="color: var(--color-text-light);">{waqfUitlegText}</p>
-      <div class="max-w-[800px] mx-auto aspect-video bg-white rounded-lg border border-border flex items-center justify-center fade-up delay-2">
-        <p style="color: var(--color-text-light);">▶ Video: Wat is een Waqf? In 2 minuten uitgelegd</p>
+      <p class="text-lg mx-auto mb-10 fade-up delay-1" style="color: var(--color-text-light);">{waqfUitlegText}</p>
+      <div class="fade-up delay-2">
+        <a href="/wat-is-een-waqf" class="btn btn-outline">Lees meer over de waqf-traditie →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERHALEN TEASER -->
+  <section class="section" style="background: var(--color-peace);">
+    <div class="container max-w-[900px]">
+      <div class="text-center mb-12">
+        <h2 class="mb-4 fade-up">1400 jaar aan bewijs</h2>
+        <p class="text-lg max-w-[700px] mx-auto fade-up delay-1" style="color: var(--color-text-light);">
+          Een waqf hoeft niet bewezen te worden — de geschiedenis deed dat al. Van Uthman's waterput tot Al-Azhar Universiteit tot moderne waqfs vandaag.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card card-capital fade-up delay-1">
+          <div class="text-4xl mb-3">💧</div>
+          <h3 class="text-lg mb-2">Biʾr Rumah</h3>
+          <p class="text-sm" style="color: var(--color-text-light);">
+            De waterput die Uthman ibn Affan 1400 jaar geleden schonk — nog altijd in gebruik.
+          </p>
+        </div>
+        <div class="card card-capital fade-up delay-2">
+          <div class="text-4xl mb-3">📚</div>
+          <h3 class="text-lg mb-2">Al-Azhar</h3>
+          <p class="text-sm" style="color: var(--color-text-light);">
+            De oudste nog werkende universiteit ter wereld, 1050+ jaar gefinancierd door waqf.
+          </p>
+        </div>
+        <div class="card card-capital fade-up delay-3">
+          <div class="text-4xl mb-3">🕌</div>
+          <h3 class="text-lg mb-2">Süleymaniye</h3>
+          <p class="text-sm" style="color: var(--color-text-light);">
+            Het Istanbulse complex uit 1557: moskee, ziekenhuis, keukens — alles via waqf.
+          </p>
+        </div>
+      </div>
+      <div class="text-center mt-10 fade-up delay-4">
+        <a href="/verhalen" class="btn btn-outline">Lees alle verhalen →</a>
       </div>
     </div>
   </section>
