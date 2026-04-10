@@ -9,6 +9,8 @@ import { hisabRapport } from './schemas/hisabRapport';
 import { faqItem } from './schemas/faqItem';
 import { impactStory } from './schemas/impactStory';
 import { nieuwsPost } from './schemas/nieuwsPost';
+import { ebook } from './schemas/ebook';
+import { mosque } from './schemas/mosque';
 
 export const schemaTypes = [
   // Singletons
@@ -24,4 +26,6 @@ export const schemaTypes = [
   faqItem,
   impactStory,
   nieuwsPost,
+  ebook,
+  mosque,
 ];

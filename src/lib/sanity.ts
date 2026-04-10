@@ -83,3 +83,21 @@ export async function fetchNieuwsPosts() {
     titel, slug, samenvatting, afbeelding, publicatieDatum
   }`), 'fetchNieuwsPosts') ?? [];
 }
+
+// ── E-books ──
+
+export async function fetchEbooks(categorie?: string) {
+  const filter = categorie ? `&& categorie == "${categorie}"` : '';
+  return await safe(sanityClient.fetch(`*[_type == "ebook" && gepubliceerd == true ${filter}] | order(volgorde asc){
+    titel, categorie, beschrijving, aantalPaginas, omslagKleur, downloadCount,
+    "pdfUrl": pdfBestand.asset->url
+  }`), 'fetchEbooks') ?? [];
+}
+
+// ── Moskeeën ──
+
+export async function fetchMosques() {
+  return await safe(sanityClient.fetch(`*[_type == "mosque" && actief == true] | order(volgorde asc){
+    naam, stad, status, beschrijving, websiteUrl, theme, afbeelding, volgorde
+  }`), 'fetchMosques') ?? [];
+}

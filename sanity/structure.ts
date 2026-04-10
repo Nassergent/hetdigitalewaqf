@@ -94,6 +94,34 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
+      // ── Kennis & Diensten ──
+      S.listItem()
+        .title('📚 Kennis & Diensten')
+        .child(
+          S.list()
+            .title('Kennis & Diensten')
+            .items([
+              S.listItem()
+                .title('📖 E-books')
+                .child(
+                  S.documentList()
+                    .title('E-books')
+                    .filter('_type == "ebook"')
+                    .defaultOrdering([{ field: 'volgorde', direction: 'asc' }])
+                ),
+              S.listItem()
+                .title('🕌 Moskeeën')
+                .child(
+                  S.documentList()
+                    .title('Moskeeën')
+                    .filter('_type == "mosque"')
+                    .defaultOrdering([{ field: 'volgorde', direction: 'asc' }])
+                ),
+            ])
+        ),
+
+      S.divider(),
+
       // ── Content ──
       S.listItem()
         .title('📝 Content')

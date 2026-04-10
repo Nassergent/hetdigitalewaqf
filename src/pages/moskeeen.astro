@@ -1,5 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { fetchMosques } from '../lib/sanity';
+
+const sanityMosques = await fetchMosques();
+
+const fallbackMosques = [
+  { naam: "Moskee El Albani", stad: "Gent, België", status: "Live", beschrijving: "De eerste moskee op het Ummah.be platform. Volledig operationeel met gebedstijden, donaties en evenementen.", websiteUrl: "https://moskee-el-albani-gent.vercel.app" },
+  { naam: "Moskee El Fath", stad: "Gent, België", status: "Live", beschrijving: "Tweede moskee in de fleet. Charcoal Sage thema met volledige gebedstijden en donatie-integratie.", websiteUrl: "https://moskee-el-fath-gent.vercel.app" },
+  { naam: "Moskee OKBA IBN NAFI", stad: "Warandestraat 39, 9000 Gent", status: "Bouwfase", beschrijving: "Nieuwste moskee in de fleet. Charcoal Sage thema met live gebedstijden en smart prayer alerts.", websiteUrl: "https://moskee-okba-ibn-nafi.vercel.app" },
+];
+
+const mosques = sanityMosques.length > 0 ? sanityMosques : fallbackMosques;
 ---
 
 <Layout title="Moskeeën — Ummah.be Waqf" description="Moskeeën die gebruik maken van het Ummah.be platform.">
@@ -22,47 +33,24 @@ import Layout from '../layouts/Layout.astro';
   <section class="section">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- El Albani Gent -->
-        <div class="card card-capital fade-up delay-1">
-          <div class="badge-sacred mb-4">Live</div>
-          <h3 class="text-xl mb-2">Moskee El Albani</h3>
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">Gent, België</p>
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">
-            De eerste moskee op het Ummah.be platform. Volledig operationeel met
-            gebedstijden, donaties en evenementen.
-          </p>
-          <a href="https://moskee-el-albani-gent.vercel.app" target="_blank" rel="noopener" class="text-sm font-semibold no-underline" style="color: var(--color-capital);">
-            Bezoek website →
-          </a>
-        </div>
-
-        <!-- El Fath Gent -->
-        <div class="card card-capital fade-up delay-2">
-          <div class="badge-sacred mb-4">Live</div>
-          <h3 class="text-xl mb-2">Moskee El Fath</h3>
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">Gent, België</p>
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">
-            Tweede moskee in de fleet. Charcoal Sage thema met volledige
-            gebedstijden en donatie-integratie.
-          </p>
-          <a href="https://moskee-el-fath-gent.vercel.app" target="_blank" rel="noopener" class="text-sm font-semibold no-underline" style="color: var(--color-capital);">
-            Bezoek website →
-          </a>
-        </div>
-
-        <!-- OKBA IBN NAFI -->
-        <div class="card card-capital fade-up delay-3">
-          <div class="badge-growth mb-4">Bouwfase</div>
-          <h3 class="text-xl mb-2">Moskee OKBA IBN NAFI</h3>
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">Warandestraat 39, 9000 Gent</p>
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">
-            Nieuwste moskee in de fleet. Charcoal Sage thema met live gebedstijden
-            en smart prayer alerts.
-          </p>
-          <a href="https://moskee-okba-ibn-nafi.vercel.app" target="_blank" rel="noopener" class="text-sm font-semibold no-underline" style="color: var(--color-capital);">
-            Bezoek website →
-          </a>
-        </div>
+        {mosques.map((mosque: any, i: number) => {
+          const badgeClass = mosque.status === 'Live' ? 'badge-sacred' : mosque.status === 'Bouwfase' ? 'badge-growth' : 'badge-zakat';
+          return (
+            <div class="card card-capital fade-up" style={`animation-delay: ${i * 0.06}s;`}>
+              <div class={`${badgeClass} mb-4`}>{mosque.status}</div>
+              <h3 class="text-xl mb-2">{mosque.naam}</h3>
+              <p class="text-sm mb-4 text-text-light">{mosque.stad}</p>
+              {mosque.beschrijving && (
+                <p class="text-sm mb-4 text-text-light">{mosque.beschrijving}</p>
+              )}
+              {mosque.websiteUrl && (
+                <a href={mosque.websiteUrl} target="_blank" rel="noopener noreferrer" class="text-sm font-semibold no-underline link-arrow text-capital">
+                  Bezoek website
+                </a>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <!-- Meer moskeeën -->

@@ -1,38 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { fetchEbooks } from '../lib/sanity';
 
-const ebooks = [
-  {
-    title: "Wat is Islam?",
-    category: "Nieuw bij Islam",
-    description: "Een heldere introductie voor iedereen die meer wilt weten over de islam. Geschreven in begrijpelijk Nederlands.",
-    pages: "32 pagina's",
-    color: "bg-clarity"
-  },
-  {
-    title: "De Eerste Stappen",
-    category: "Nieuwe Moslims",
-    description: "Een praktische gids voor wie de shahada heeft uitgesproken. Van gebed tot gemeenschap.",
-    pages: "48 pagina's",
-    color: "bg-capital"
-  },
-  {
-    title: "Waqf: Een Eeuwige Gift",
-    category: "Islamitische Financiën",
-    description: "Alles over de waqf-traditie — van de Profeet ﷺ tot vandaag. Hoe werkt het en waarom doet het ertoe?",
-    pages: "24 pagina's",
-    color: "bg-gold"
-  },
-  {
-    title: "Ramadan Handboek",
-    category: "Voor het Gezin",
-    description: "Praktische tips, dua's en uitleg over de vastenmaand. Voor het hele gezin.",
-    pages: "40 pagina's",
-    color: "bg-growth"
-  }
+const sanityEbooks = await fetchEbooks();
+
+// Fallback naar hardcoded data als Sanity leeg is
+const fallbackEbooks = [
+  { titel: "Wat is Islam?", categorie: "Nieuw bij Islam", beschrijving: "Een heldere introductie voor iedereen die meer wilt weten over de islam. Geschreven in begrijpelijk Nederlands.", aantalPaginas: "32 pagina's", omslagKleur: "bg-clarity", pdfUrl: null, downloadCount: 0 },
+  { titel: "De Eerste Stappen", categorie: "Nieuwe Moslims", beschrijving: "Een praktische gids voor wie de shahada heeft uitgesproken. Van gebed tot gemeenschap.", aantalPaginas: "48 pagina's", omslagKleur: "bg-capital", pdfUrl: null, downloadCount: 0 },
+  { titel: "Waqf: Een Eeuwige Gift", categorie: "Islamitische Financiën", beschrijving: "Alles over de waqf-traditie — van de Profeet ﷺ tot vandaag.", aantalPaginas: "24 pagina's", omslagKleur: "bg-gold", pdfUrl: null, downloadCount: 0 },
+  { titel: "Ramadan Handboek", categorie: "Voor het Gezin", beschrijving: "Praktische tips, dua's en uitleg over de vastenmaand. Voor het hele gezin.", aantalPaginas: "40 pagina's", omslagKleur: "bg-growth", pdfUrl: null, downloadCount: 0 },
 ];
 
-const categories = ["Alle", "Nieuw bij Islam", "Nieuwe Moslims", "Islamitische Financiën", "Voor het Gezin"];
+const ebooks = sanityEbooks.length > 0 ? sanityEbooks : fallbackEbooks;
+const totalDownloads = ebooks.reduce((sum: number, e: any) => sum + (e.downloadCount || 0), 0);
+
+// Dynamische categorieën uit data + "Alle"
+const uniqueCategories = [...new Set(ebooks.map((e: any) => e.categorie))];
+const categories = ["Alle", ...uniqueCategories];
 ---
 
 <Layout title="E-books — Ummah.be Waqf" description="Gratis islamitische e-books als sadaqah jariyah. Download zonder voorwaarden.">
@@ -67,7 +52,7 @@ const categories = ["Alle", "Nieuw bij Islam", "Nieuwe Moslims", "Islamitische F
       <!-- Download counter -->
       <div class="text-center mb-8 fade-up">
         <p class="text-sm font-semibold text-text-light">
-          <span class="text-capital font-bold text-lg">0</span> e-books gedownload
+          <span class="text-capital font-bold text-lg">{totalDownloads}</span> e-books gedownload
         </p>
       </div>
 
@@ -89,26 +74,30 @@ const categories = ["Alle", "Nieuw bij Islam", "Nieuwe Moslims", "Islamitische F
       <!-- E-books grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="ebooks-grid">
         {ebooks.map((book, i) => (
-          <div class={`card fade-up delay-${i + 1} ebook-card`} data-category={book.category}>
+          <div class={`card fade-up delay-${i + 1} ebook-card`} data-category={book.categorie}>
             <!-- Book cover placeholder -->
-            <div class={`${book.color} rounded-lg mb-4 flex items-center justify-center p-6`} style="min-height: 180px;">
-              <p class="font-heading font-bold text-lg text-center text-white leading-tight">{book.title}</p>
+            <div class={`${book.omslagKleur} rounded-lg mb-4 flex items-center justify-center p-6`} style="min-height: 180px;">
+              <p class="font-heading font-bold text-lg text-center text-white leading-tight">{book.titel}</p>
             </div>
 
             <!-- Category badge -->
-            <span class="badge badge-sacred mb-3">{book.category}</span>
+            <span class="badge badge-sacred mb-3">{book.categorie}</span>
 
             <!-- Title -->
-            <h3 class="text-lg mb-2">{book.title}</h3>
+            <h3 class="text-lg mb-2">{book.titel}</h3>
 
             <!-- Description -->
-            <p class="text-sm text-text-light mb-3 text-clamp-3">{book.description}</p>
+            <p class="text-sm text-text-light mb-3 text-clamp-3">{book.beschrijving}</p>
 
             <!-- Page count -->
-            <p class="text-xs text-text-light mb-4">{book.pages}</p>
+            <p class="text-xs text-text-light mb-4">{book.aantalPaginas}</p>
 
             <!-- Download button -->
-            <a href="#" class="btn btn-capital text-center w-full block">Download PDF</a>
+            {book.pdfUrl ? (
+              <a href={book.pdfUrl} target="_blank" rel="noopener noreferrer" class="btn btn-capital text-center w-full block" download>Download PDF</a>
+            ) : (
+              <span class="btn text-center w-full block" style="background: var(--color-border); color: var(--color-text-light); cursor: default;">Binnenkort beschikbaar</span>
+            )}
           </div>
         ))}
       </div>
