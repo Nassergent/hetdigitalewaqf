@@ -5,9 +5,9 @@ import { fetchHomePage, fetchWaqfConfig } from '../lib/sanity';
 const home = await fetchHomePage();
 const waqf = await fetchWaqfConfig();
 
-const heroTitle = home?.heroTitle || 'Ummah.be Waqf';
-const heroSubtitle = home?.heroSubtitle || 'Een gift die nooit verloren gaat.\nVoor Allah. Voor de gemeenschap.\nVoor altijd.';
-const heroDescription = home?.heroDescription || 'Een waqf is een oude islamitische traditie: je schenkt iets — geld, een huis, een stuk grond — en het blijft voor altijd bestaan. Elke maand geven de vruchten ervan iets terug aan onze gemeenschap. Dit noemen we sadaqah jariyah: doorlopende liefdadigheid die 1440 jaar teruggaat tot de Profeet ﷺ en zijn metgezellen.';
+const heroTitle = home?.heroTitle || 'Het eeuwige fonds voor de moslimgemeenschap in België';
+const heroSubtitle = home?.heroSubtitle || 'Een waqf is een eeuwig fonds: het kapitaal blijft, de opbrengsten dienen de gemeenschap — voor altijd.';
+const heroDescription = home?.heroDescription || 'Ummah.be bouwt een waqf op: een fonds dat nooit wordt uitgegeven. De opbrengsten financieren gratis moskee-websites, e-books, mentorschap en meer. Gebaseerd op sadaqah jariyah — doorlopende liefdadigheid die 1440 jaar teruggaat tot de Profeet ﷺ en zijn metgezellen.';
 const btn1Label = home?.heroButtonPrimaryLabel || 'Draag bij aan Kapitaal';
 const btn1Link = home?.heroButtonPrimaryLink || '/steun-ons';
 const btn2Label = home?.heroButtonSecondaryLabel || "Steun Programma's Deze Maand";
@@ -38,8 +38,9 @@ const jaarlijkseOpbrengst = Math.round(minWaqf * rendement / 100);
           <a href={btn1Link} class="btn btn-capital">{btn1Label}</a>
           <a href="#hoe-het-werkt" class="btn btn-outline">Hoe werkt het?</a>
         </div>
-        <a href="/wat-is-een-waqf" class="inline-block mt-8 text-sm font-medium no-underline link-arrow text-capital">
-          Wat is een waqf? Lees de uitleg
+        <p class="mt-8 text-sm text-text-light max-w-[500px] mx-auto">Een waqf is een eeuwig fonds uit de islamitische traditie — het kapitaal blijft onaangeraakt, alleen de opbrengsten worden ingezet.</p>
+        <a href="/wat-is-een-waqf" class="inline-block mt-3 text-sm font-medium no-underline link-arrow text-capital">
+          Lees meer over hoe een waqf werkt
         </a>
       </div>
     </div>
@@ -73,7 +74,7 @@ const jaarlijkseOpbrengst = Math.round(minWaqf * rendement / 100);
         <div class="card card-growth text-center fade-up delay-4 step-connector">
           <div class="step-number step-number-growth">&#10003;</div>
           <h3 class="text-lg mb-2">Mentorschap & E-books</h3>
-          <p class="text-sm text-text-light">Programma's dienen moslims</p>
+          <p class="text-sm text-text-light">Gratis kennis, begeleiding en moskee-websites voor de gemeenschap</p>
         </div>
       </div>
     </div>
