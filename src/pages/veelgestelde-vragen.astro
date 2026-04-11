@@ -195,7 +195,7 @@ const gesorteerdeGroepen = groepVolgorde.filter(cat => groepen[cat]?.length > 0)
             </div>
             <div>
               <h2 class="mb-1" style={`color: ${info.kleur};`}>{info.label}</h2>
-              <p class="text-sm" style="color: var(--color-text-light);">{items.length} {items.length === 1 ? 'vraag' : 'vragen'}</p>
+              <p class="text-sm text-text-light">{items.length} {items.length === 1 ? 'vraag' : 'vragen'}</p>
             </div>
           </div>
 
@@ -205,7 +205,7 @@ const gesorteerdeGroepen = groepVolgorde.filter(cat => groepen[cat]?.length > 0)
                 <summary class="font-heading font-bold text-base" style={`color: ${info.kleur};`}>
                   {item.vraag}
                 </summary>
-                <div class="mt-4 text-sm leading-relaxed" style="color: var(--color-text);">
+                <div class="mt-4 text-sm leading-relaxed text-text">
                   {typeof item.antwoord === 'string' ? (
                     <p>{item.antwoord}</p>
                   ) : (

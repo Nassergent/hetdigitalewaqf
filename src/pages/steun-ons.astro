@@ -26,14 +26,14 @@ import Layout from '../layouts/Layout.astro';
       <div id="tab-waqf" class="tab-content fade-up delay-1" role="tabpanel" aria-labelledby="tab-btn-waqf">
         <div class="card card-capital">
           <h2 class="mb-2">Bijdragen aan het Waqf-Kapitaal</h2>
-          <p class="text-lg mb-6" style="color: var(--color-clarity);">Sadaqah jariyah voor de Ummah</p>
-          <p class="mb-6" style="color: var(--color-text-light);">
+          <p class="text-lg mb-6 text-clarity">Sadaqah jariyah voor de Ummah</p>
+          <p class="mb-6 text-text-light">
             Jouw bijdrage wordt toegevoegd aan het waqf-kapitaal. Dit kapitaal blijft juridisch onschendbaar — alleen de opbrengsten worden gebruikt om programma's te financieren.
           </p>
           <div class="p-4 mb-8" style="background: rgba(201,169,97,0.1); border-left: 3px solid var(--color-gold);">
-            <p class="text-sm" style="color: var(--color-text);">
+            <p class="text-sm text-text">
               <strong>Rekenvoorbeeld:</strong> Bij een bijdrage van €1.000 en een verwacht rendement van 5% worden jaarlijks circa €50 aan opbrengsten gegenereerd. Die opbrengsten gaan naar mentorschap, educatie en community-werk.
-              <br /><em class="text-xs" style="color: var(--color-text-light);">Rendement is een schatting, niet gegarandeerd.</em>
+              <br /><em class="text-xs text-text-light">Rendement is een schatting, niet gegarandeerd.</em>
             </p>
           </div>
 
@@ -49,7 +49,7 @@ import Layout from '../layouts/Layout.astro';
             <div>
               <label for="waqf-amount" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-capital); letter-spacing: 0.5px;">Bedrag (€) *</label>
               <input id="waqf-amount" type="number" min="10" step="1" max="1000000" placeholder="1000" class="input" required />
-              <p class="text-xs mt-1" style="color: var(--color-text-light);">Minimum €10. Geen maximumbedrag.</p>
+              <p class="text-xs mt-1 text-text-light">Minimum €10. Geen maximumbedrag.</p>
             </div>
             <div>
               <label for="waqf-note" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-capital); letter-spacing: 0.5px;">Opmerking (optioneel)</label>
@@ -57,19 +57,19 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <label class="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" class="checkbox-touch mt-1 shrink-0" required />
-              <span class="text-sm" style="color: var(--color-text-light);">
+              <span class="text-sm text-text-light">
                 Ik begrijp dat deze bijdrage onschendbaar waqf-kapitaal wordt en niet kan worden teruggevorderd.
               </span>
             </label>
             <label class="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" class="checkbox-touch mt-1 shrink-0" required />
-              <span class="text-sm" style="color: var(--color-text-light);">
-                Ik ga akkoord met het <a href="/privacy" style="color: var(--color-clarity);">privacybeleid</a> en verwerking van mijn gegevens conform de GDPR.
+              <span class="text-sm text-text-light">
+                Ik ga akkoord met het <a href="/privacy" class="text-clarity">privacybeleid</a> en verwerking van mijn gegevens conform de GDPR.
               </span>
             </label>
             <div class="form-message" role="alert" aria-live="polite" data-form-msg="waqf"></div>
             <button type="submit" class="btn btn-capital w-full text-center" data-form-btn="waqf">Draag bij aan het Kapitaal</button>
-            <p class="text-xs text-center" style="color: var(--color-text-light);">
+            <p class="text-xs text-center text-text-light">
               Betaalverwerking volgt binnenkort via Mollie (Bancontact, iDEAL, kaart). Contact ons voor een rechtstreekse overschrijving.
             </p>
           </form>
@@ -80,8 +80,8 @@ import Layout from '../layouts/Layout.astro';
       <div id="tab-program" class="tab-content hidden" role="tabpanel" aria-labelledby="tab-btn-program">
         <div class="card card-growth">
           <h2 class="mb-2">Steun de Programma's</h2>
-          <p class="text-lg mb-6" style="color: var(--color-growth);">Directe impact, deze maand</p>
-          <p class="mb-8" style="color: var(--color-text-light);">
+          <p class="text-lg mb-6 text-growth">Directe impact, deze maand</p>
+          <p class="mb-8 text-text-light">
             Bijdragen in deze categorie gaan rechtstreeks naar de lopende programma's — mentorschap, e-books en community-werk. Eenmalig of maandelijks, geheel vrijblijvend.
           </p>
           <form class="space-y-5">
@@ -106,8 +106,8 @@ import Layout from '../layouts/Layout.astro';
             </fieldset>
             <label class="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" class="checkbox-touch mt-1 shrink-0" required />
-              <span class="text-sm" style="color: var(--color-text-light);">
-                Ik ga akkoord met het <a href="/privacy" style="color: var(--color-clarity);">privacybeleid</a> en verwerking van mijn gegevens conform de GDPR.
+              <span class="text-sm text-text-light">
+                Ik ga akkoord met het <a href="/privacy" class="text-clarity">privacybeleid</a> en verwerking van mijn gegevens conform de GDPR.
               </span>
             </label>
             <div class="form-message" role="alert" aria-live="polite" data-form-msg="program"></div>
@@ -120,23 +120,23 @@ import Layout from '../layouts/Layout.astro';
       <div id="tab-zakat" class="tab-content hidden" role="tabpanel" aria-labelledby="tab-btn-zakat">
         <div class="card card-zakat">
           <h2 class="mb-2">Over Zakat</h2>
-          <p class="text-lg mb-6" style="color: var(--color-zakat);">Belangrijk om te weten</p>
+          <p class="text-lg mb-6 text-zakat">Belangrijk om te weten</p>
 
           <div class="p-4 mb-6" style="background: rgba(217,132,91,0.1); border-left: 3px solid var(--color-zakat);">
-            <p class="text-sm font-semibold mb-2" style="color: var(--color-zakat-dark);">Ummah.be Waqf is géén zakat-instituut.</p>
-            <p class="text-sm" style="color: var(--color-text);">
+            <p class="text-sm font-semibold mb-2 text-zakat-dark">Ummah.be Waqf is géén zakat-instituut.</p>
+            <p class="text-sm text-text">
               Zakat is een verplichte jaarlijkse gift (2,5% van het vermogen boven de nisab-drempel) die volgens de Qur'an (Surah 9:60) bestemd is voor acht specifieke categorieën begunstigden: de armen, de behoeftigen, zakat-beheerders, nieuwe moslims, slaven, schuldenaren, op Gods weg, en reizigers. Een waqf-bijdrage aan ons kapitaal valt niet binnen deze categorieën.
             </p>
           </div>
 
-          <p class="mb-4 font-semibold" style="color: var(--color-capital);">Waar kan je dan wel zakat geven?</p>
-          <ul class="space-y-2 text-sm mb-6" style="color: var(--color-text);">
+          <p class="mb-4 font-semibold text-capital">Waar kan je dan wel zakat geven?</p>
+          <ul class="space-y-2 text-sm mb-6 text-text">
             <li>• <strong>Islamic Relief België</strong> — internationale zakat-distributie</li>
             <li>• <strong>Muslim Aid</strong> — humanitaire hulp in 40+ landen</li>
             <li>• <strong>Lokale moskee</strong> — veel Belgische moskeeën verzamelen zakat voor lokale noden</li>
           </ul>
 
-          <p class="text-sm" style="color: var(--color-text-light);">
+          <p class="text-sm text-text-light">
             Heb je jouw zakat al afgedragen en wil je daarbovenop iets blijvends doen? Dan is een waqf-bijdrage een perfecte aanvulling — vrijwillige sadaqah jariyah met eeuwige impact.
           </p>
 

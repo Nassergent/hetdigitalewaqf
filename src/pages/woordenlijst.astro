@@ -162,7 +162,7 @@ const categorieen = ['Kern', 'Governance', 'Fiqh', 'Types', 'Nalatenschap', 'Lie
   <!-- INTRO -->
   <section class="section">
     <div class="container max-w-[900px] text-center">
-      <p class="text-base fade-up" style="color: var(--color-text-light);">
+      <p class="text-base fade-up text-text-light">
         Op deze site gebruiken we af en toe Arabische termen — omdat ze vaak precies het concept beschrijven dat geen Nederlands equivalent heeft. Hier vind je ze allemaal terug, met uitspraak, uitleg en context.
       </p>
     </div>
@@ -180,11 +180,11 @@ const categorieen = ['Kern', 'Governance', 'Fiqh', 'Types', 'Nalatenschap', 'Lie
             {items.map((t, i) => (
               <div class="card fade-up" style={`animation-delay: ${i * 0.05}s; border-left: 3px solid var(--color-capital);`}>
                 <div class="flex flex-wrap items-baseline gap-3 mb-3">
-                  <h3 class="text-xl font-heading font-bold" style="color: var(--color-capital);">{t.term}</h3>
-                  <span class="font-arabic text-lg" lang="ar" dir="rtl" style="color: var(--color-capital);">{t.arabisch}</span>
-                  <span class="text-sm italic" style="color: var(--color-text-light);">({t.uitspraak})</span>
+                  <h3 class="text-xl font-heading font-bold text-capital">{t.term}</h3>
+                  <span class="font-arabic text-lg text-capital" lang="ar" dir="rtl">{t.arabisch}</span>
+                  <span class="text-sm italic text-text-light">({t.uitspraak})</span>
                 </div>
-                <p class="text-sm leading-relaxed" style="color: var(--color-text);">{t.uitleg}</p>
+                <p class="text-sm leading-relaxed text-text">{t.uitleg}</p>
               </div>
             ))}
           </div>

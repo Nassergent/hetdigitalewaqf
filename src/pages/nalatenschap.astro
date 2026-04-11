@@ -106,7 +106,7 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
   <!-- DISCLAIMER -->
   <section class="py-6" style="background: rgba(217,132,91,0.08); border-bottom: 1px solid var(--color-border);">
     <div class="container max-w-[900px] text-center">
-      <p class="text-sm" style="color: var(--color-text);">
+      <p class="text-sm text-text">
         ⚠️ <strong>Belangrijk:</strong> Deze pagina is informatief, niet juridisch of religieus advies. Raadpleeg altijd een <strong>notaris</strong> voor het Belgisch erfrecht en een <strong>islamitische geleerde</strong> voor de shariah-kant voordat u beslist.
       </p>
     </div>
@@ -117,11 +117,11 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
     <div class="container max-w-[900px]">
       <h2 class="text-center mb-10 fade-up">{traditieTitle}</h2>
       <div class="card card-capital fade-up delay-1">
-        <p class="font-arabic text-2xl text-right mb-4" lang="ar" dir="rtl" style="color: var(--color-capital);">
+        <p class="font-arabic text-2xl text-right mb-4 text-capital" lang="ar" dir="rtl">
           {hadithArabisch}
         </p>
-        <p class="italic text-lg mb-6" style="color: var(--color-capital);">{hadithVertaling}</p>
-        <p class="text-base leading-relaxed" style="color: var(--color-text);">{traditieText}</p>
+        <p class="italic text-lg mb-6 text-capital">{hadithVertaling}</p>
+        <p class="text-base leading-relaxed text-text">{traditieText}</p>
       </div>
     </div>
   </section>
@@ -130,7 +130,7 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
   <section class="section" style="background: white;">
     <div class="container">
       <h2 class="text-center mb-4 fade-up">{scenariosTitle}</h2>
-      <p class="text-center text-lg mb-12 max-w-[700px] mx-auto fade-up delay-1" style="color: var(--color-text-light);">
+      <p class="text-center text-lg mb-12 max-w-[700px] mx-auto fade-up delay-1 text-text-light">
         {scenariosIntro}
       </p>
 
@@ -139,26 +139,26 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
           <div class="card card-capital fade-up" style={`animation-delay: ${i * 0.1}s;`}>
             <div class="badge-sacred mb-3">{scenario.fiqhNaam}</div>
             <h3 class="text-lg mb-3">{scenario.titel}</h3>
-            <p class="text-sm mb-4" style="color: var(--color-text);">{scenario.kort}</p>
+            <p class="text-sm mb-4 text-text">{scenario.kort}</p>
 
             {scenario.voorbeeld && (
               <div class="p-3 mb-3" style="background: rgba(201,169,97,0.08); border-left: 2px solid var(--color-gold);">
-                <p class="text-xs font-semibold mb-1" style="color: var(--color-gold);">VOORBEELD</p>
-                <p class="text-sm" style="color: var(--color-text-light);">{scenario.voorbeeld}</p>
+                <p class="text-xs font-semibold mb-1 text-gold">VOORBEELD</p>
+                <p class="text-sm text-text-light">{scenario.voorbeeld}</p>
               </div>
             )}
 
             {scenario.belgischRecht && (
               <div class="p-3 mb-3" style="background: rgba(46,92,138,0.08); border-left: 2px solid var(--color-clarity);">
-                <p class="text-xs font-semibold mb-1" style="color: var(--color-clarity);">⚖️ BELGISCH RECHT</p>
-                <p class="text-sm" style="color: var(--color-text-light);">{scenario.belgischRecht}</p>
+                <p class="text-xs font-semibold mb-1 text-clarity">⚖️ BELGISCH RECHT</p>
+                <p class="text-sm text-text-light">{scenario.belgischRecht}</p>
               </div>
             )}
 
             {scenario.fiqhNoot && (
               <div class="p-3" style="background: rgba(27,94,63,0.08); border-left: 2px solid var(--color-capital);">
-                <p class="text-xs font-semibold mb-1" style="color: var(--color-capital);">🕌 FIQH NOOT</p>
-                <p class="text-sm" style="color: var(--color-text-light);">{scenario.fiqhNoot}</p>
+                <p class="text-xs font-semibold mb-1 text-capital">🕌 FIQH NOOT</p>
+                <p class="text-sm text-text-light">{scenario.fiqhNoot}</p>
               </div>
             )}
           </div>
@@ -171,7 +171,7 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
   <section class="section">
     <div class="container max-w-[900px]">
       <h2 class="text-center mb-4 fade-up">{procesTitle}</h2>
-      <p class="text-center text-lg mb-12 fade-up delay-1" style="color: var(--color-text-light);">{procesIntro}</p>
+      <p class="text-center text-lg mb-12 fade-up delay-1 text-text-light">{procesIntro}</p>
 
       <div class="space-y-4">
         {processtappen.map((stap: any, i: number) => (
@@ -181,7 +181,7 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
             </div>
             <div class="flex-1 card">
               <h3 class="text-lg mb-2">{stap.titel}</h3>
-              <p class="text-sm" style="color: var(--color-text-light);">{stap.beschrijving}</p>
+              <p class="text-sm text-text-light">{stap.beschrijving}</p>
             </div>
           </div>
         ))}
@@ -193,15 +193,15 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
   <section class="section" style="background: white;">
     <div class="container max-w-[900px]">
       <h2 class="text-center mb-4 fade-up">{criteriaTitle}</h2>
-      <p class="text-center text-lg mb-12 fade-up delay-1" style="color: var(--color-text-light);">{criteriaIntro}</p>
+      <p class="text-center text-lg mb-12 fade-up delay-1 text-text-light">{criteriaIntro}</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="card fade-up" style="border-left: 4px solid var(--color-growth);">
-          <h3 class="text-xl mb-4" style="color: var(--color-growth);">✅ Wel</h3>
-          <ul class="space-y-3 text-sm" style="color: var(--color-text);">
+          <h3 class="text-xl mb-4 text-growth">✅ Wel</h3>
+          <ul class="space-y-3 text-sm text-text">
             {welCriteria.map((c: string) => (
               <li class="flex gap-2">
-                <span style="color: var(--color-growth);">✓</span>
+                <span class="text-growth">✓</span>
                 <span>{c}</span>
               </li>
             ))}
@@ -209,11 +209,11 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
         </div>
 
         <div class="card fade-up delay-1" style="border-left: 4px solid var(--color-zakat);">
-          <h3 class="text-xl mb-4" style="color: var(--color-zakat);">✗ Niet</h3>
-          <ul class="space-y-3 text-sm" style="color: var(--color-text);">
+          <h3 class="text-xl mb-4 text-zakat">✗ Niet</h3>
+          <ul class="space-y-3 text-sm text-text">
             {nietCriteria.map((c: string) => (
               <li class="flex gap-2">
-                <span style="color: var(--color-zakat);">✗</span>
+                <span class="text-zakat">✗</span>
                 <span>{c}</span>
               </li>
             ))}
@@ -231,7 +231,7 @@ const contactKnopLabel = page?.contactKnopLabel || 'Neem vertrouwelijk contact o
         {faqItems.map((item: any, i: number) => (
           <details class="card fade-up cursor-pointer" style={`animation-delay: ${i * 0.05}s;`}>
             <summary class="faq-summary">{item.vraag}</summary>
-            <p class="mt-4 text-sm leading-relaxed" style="color: var(--color-text-light);">{item.antwoord}</p>
+            <p class="mt-4 text-sm leading-relaxed text-text-light">{item.antwoord}</p>
           </details>
         ))}
       </div>

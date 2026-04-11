@@ -110,7 +110,7 @@ const stories = [
   <!-- INTRO -->
   <section class="py-10" style="background: rgba(27,94,63,0.05); border-bottom: 1px solid var(--color-border);">
     <div class="container max-w-[900px] text-center">
-      <p class="text-base" style="color: var(--color-text);">
+      <p class="text-base text-text">
         Een waqf hoeft niet te wachten op zijn "eerste verhaal" — <strong>de verhalen bestaan al</strong>, en ze zijn duizend jaar oud. Van de waterput van Uthman in Medina tot het Ottomaanse waqf-netwerk tot de moderne waqfs van vandaag: elke generatie moslims heeft bewezen dat deze traditie werkt.
       </p>
     </div>
@@ -136,12 +136,12 @@ const stories = [
                   {story.periode}
                 </p>
                 <div class="mt-4 pt-4 border-t" style="border-color: var(--color-border);">
-                  <p class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-text-light);">Impact</p>
+                  <p class="text-xs uppercase tracking-wider mb-1 text-text-light">Impact</p>
                   <p class="text-lg font-heading font-bold" style={`color: ${story.kleur};`}>{story.impact}</p>
                 </div>
                 <div class="mt-3">
-                  <p class="text-xs uppercase tracking-wider mb-1" style="color: var(--color-text-light);">Begunstigden</p>
-                  <p class="text-sm font-semibold" style="color: var(--color-text);">{story.begunstigden}</p>
+                  <p class="text-xs uppercase tracking-wider mb-1 text-text-light">Begunstigden</p>
+                  <p class="text-sm font-semibold text-text">{story.begunstigden}</p>
                 </div>
               </div>
             </div>
@@ -149,8 +149,8 @@ const stories = [
             <!-- Verhaal kolom -->
             <div class="flex-1">
               <h2 class="mb-2" style={`color: ${story.kleur};`}>{story.titel}</h2>
-              <p class="text-lg italic mb-6" style="color: var(--color-text-light);">{story.ondertitel}</p>
-              <p class="text-base leading-relaxed" style="color: var(--color-text);" set:html={story.verhaal}></p>
+              <p class="text-lg italic mb-6 text-text-light">{story.ondertitel}</p>
+              <p class="text-base leading-relaxed text-text" set:html={story.verhaal}></p>
             </div>
           </div>
         </div>
@@ -162,13 +162,13 @@ const stories = [
   <section class="section" style="background: var(--color-peace);">
     <div class="container max-w-[900px] text-center">
       <h2 class="mb-6 fade-up">Wat verbindt al deze verhalen?</h2>
-      <p class="text-lg leading-relaxed mb-6 fade-up delay-1" style="color: var(--color-text);">
+      <p class="text-lg leading-relaxed mb-6 fade-up delay-1 text-text">
         Eén ding: <strong>iemand besloot ooit iets te schenken dat nooit meer teruggenomen zou worden</strong>. Uthman met zijn waterput. Umar met zijn land. Sultan Süleyman met zijn complex. Onbekende vrouwen in Hyderabad met hun juwelen voor meisjesonderwijs.
       </p>
-      <p class="text-lg leading-relaxed mb-6 fade-up delay-2" style="color: var(--color-text);">
+      <p class="text-lg leading-relaxed mb-6 fade-up delay-2 text-text">
         Zij zagen hun gift niet als verlies. Ze zagen het als een <em>investering in de eeuwigheid</em> — in Allah's beloning, en in generaties die zij nooit zouden ontmoeten.
       </p>
-      <p class="text-lg leading-relaxed font-semibold fade-up delay-3" style="color: var(--color-capital);">
+      <p class="text-lg leading-relaxed font-semibold fade-up delay-3 text-capital">
         Ummah.be Waqf is het volgende hoofdstuk in dit verhaal. Jouw bijdrage, hoe klein ook, wordt een nieuwe schakel in een keten die 1400 jaar geleden begon.
       </p>
     </div>
@@ -178,13 +178,13 @@ const stories = [
   <section class="section" style="background: white;">
     <div class="container max-w-[900px]">
       <div class="card card-capital text-center fade-up">
-        <p class="font-arabic text-2xl mb-4" lang="ar" dir="rtl" style="color: var(--color-capital);">
+        <p class="font-arabic text-2xl mb-4 text-capital" lang="ar" dir="rtl">
           إِذَا مَاتَ الْإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ
         </p>
-        <p class="italic text-lg mb-4" style="color: var(--color-capital);">
+        <p class="italic text-lg mb-4 text-capital">
           "Wanneer een mens sterft, houden zijn daden op, behalve drie: een doorlopende liefdadigheid (sadaqah jariyah), kennis waar men profijt van heeft, en een rechtschapen kind dat voor hem bidt."
         </p>
-        <p class="text-sm" style="color: var(--color-text-light);">
+        <p class="text-sm text-text-light">
           — Sahih Muslim 1631, overgeleverd door Abu Huraira (raḍiya Allāhu ʿanhu)
         </p>
       </div>
