@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- TAB 1: WAQF KAPITAAL -->
       <div id="tab-waqf" class="tab-content fade-up delay-1" role="tabpanel" aria-labelledby="tab-btn-waqf">
-        <div class="card card-capital">
+        <div class="card card-capital" style="border-top: 3px solid var(--color-gold);">
           <h2 class="mb-2">Bijdragen aan het Waqf-Kapitaal</h2>
           <p class="text-lg mb-6 text-clarity">Sadaqah jariyah voor de Ummah</p>
           <p class="mb-6 text-text-light">
@@ -39,20 +39,20 @@ import Layout from '../layouts/Layout.astro';
 
           <form class="space-y-5">
             <div>
-              <label for="waqf-name" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-capital); letter-spacing: 0.5px;">Volledige Naam *</label>
+              <label for="waqf-name" class="form-label">Volledige Naam *</label>
               <input id="waqf-name" type="text" placeholder="Uw volledige naam" class="input" required maxlength="100" />
             </div>
             <div>
-              <label for="waqf-email" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-capital); letter-spacing: 0.5px;">E-mail *</label>
+              <label for="waqf-email" class="form-label">E-mail *</label>
               <input id="waqf-email" type="email" placeholder="uw@email.be" class="input" required maxlength="254" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" />
             </div>
             <div>
-              <label for="waqf-amount" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-capital); letter-spacing: 0.5px;">Bedrag (€) *</label>
+              <label for="waqf-amount" class="form-label">Bedrag (€) *</label>
               <input id="waqf-amount" type="number" min="10" step="1" max="1000000" placeholder="1000" class="input" required />
               <p class="text-xs mt-1 text-text-light">Minimum €10. Geen maximumbedrag.</p>
             </div>
             <div>
-              <label for="waqf-note" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-capital); letter-spacing: 0.5px;">Opmerking (optioneel)</label>
+              <label for="waqf-note" class="form-label">Opmerking (optioneel)</label>
               <textarea id="waqf-note" rows="3" maxlength="500" placeholder="Bijv. 'Voor mijn overleden ouders'" class="input"></textarea>
             </div>
             <label class="flex items-start gap-3 cursor-pointer">
@@ -86,19 +86,19 @@ import Layout from '../layouts/Layout.astro';
           </p>
           <form class="space-y-5">
             <div>
-              <label for="prog-name" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-growth); letter-spacing: 0.5px;">Volledige Naam *</label>
+              <label for="prog-name" class="form-label-growth">Volledige Naam *</label>
               <input id="prog-name" type="text" placeholder="Uw volledige naam" class="input" required maxlength="100" />
             </div>
             <div>
-              <label for="prog-email" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-growth); letter-spacing: 0.5px;">E-mail *</label>
+              <label for="prog-email" class="form-label-growth">E-mail *</label>
               <input id="prog-email" type="email" placeholder="uw@email.be" class="input" required maxlength="254" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" />
             </div>
             <div>
-              <label for="prog-amount" class="block text-sm font-semibold uppercase mb-2" style="color: var(--color-growth); letter-spacing: 0.5px;">Bedrag (€) * — minimum €10</label>
+              <label for="prog-amount" class="form-label-growth">Bedrag (€) * — minimum €10</label>
               <input id="prog-amount" type="number" min="10" step="1" max="1000000" placeholder="50" class="input" required />
             </div>
             <fieldset>
-              <legend class="block text-sm font-semibold uppercase mb-3" style="color: var(--color-growth); letter-spacing: 0.5px;">Frequentie</legend>
+              <legend class="form-label-growth">Frequentie</legend>
               <div class="flex gap-4">
                 <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="freq" value="once" checked /> Eenmalig</label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="freq" value="monthly" /> Maandelijks</label>
@@ -156,7 +156,7 @@ import Layout from '../layouts/Layout.astro';
           <h2 class="mb-4">De Bouwers</h2>
           <p class="text-lg mb-6 text-clarity">Bouw mee aan een waqf die eeuwig de Ummah dient</p>
           <p class="mb-8 text-text-light max-w-[600px] mx-auto">
-            Word Bouwer en draag maandelijks bij aan het waqf-kapitaal. Vanaf €5 per maand. De eerste 50 Bouwers worden Founding Bouwers met exclusieve erkenning.
+            Word Bouwer en draag maandelijks bij aan het waqf-kapitaal. Vanaf €5 per maand. Vroege Bouwers ontvangen exclusieve erkenning als Founding Bouwer.
           </p>
           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-8" style="background: rgba(201,169,97,0.12); color: var(--color-capital); border: 1px solid rgba(201,169,97,0.25);">
             <span class="w-2 h-2 rounded-full animate-pulse" style="background: var(--color-gold);"></span>
@@ -175,7 +175,7 @@ import Layout from '../layouts/Layout.astro';
 <script>
   const tabs = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
   const contents = document.querySelectorAll('.tab-content');
-  const colors: Record<string, string> = { waqf: '#1B5E3F', program: '#4A7C59', zakat: '#D9845B', bouwers: '#1B5E3F' };
+  const colors: Record<string, string> = { waqf: 'var(--color-capital)', program: 'var(--color-growth)', zakat: 'var(--color-zakat)', bouwers: 'var(--color-capital)' };
 
   function activateTab(tab: string) {
     contents.forEach(c => c.classList.add('hidden'));
