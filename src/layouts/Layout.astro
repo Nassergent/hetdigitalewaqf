@@ -57,6 +57,26 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://ummah.be');
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#1B5E3F" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Ummah.be Waqf",
+      "url": "https://ummah.be",
+      "logo": "https://ummah.be/logo.png",
+      "description": "Het eeuwige fonds voor de moslimgemeenschap in België. Gratis moskee-websites, e-books en gemeenschapsprojecten.",
+      "foundingDate": "2026",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "salam@ummah.be",
+        "contactType": "customer service"
+      }
+    })}></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Naar hoofdinhoud</a>

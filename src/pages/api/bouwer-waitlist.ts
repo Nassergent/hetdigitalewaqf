@@ -1,0 +1,40 @@
+import type { APIRoute } from 'astro';
+import { writeClient } from '../../../sanity/lib/client';
+
+const rateLimit = new Map<string, number>();
+
+export const POST: APIRoute = async ({ request }) => {
+  try {
+    const ip = request.headers.get('x-forwarded-for') || 'unknown';
+    const now = Date.now();
+    const last = rateLimit.get(ip) || 0;
+    if (now - last < 30000) {
+      return new Response(JSON.stringify({ error: 'Te veel verzoeken. Probeer later opnieuw.' }), { status: 429 });
+    }
+    rateLimit.set(ip, now);
+
+    const data = await request.json();
+
+    // Validation
+    if (!data.naam || !data.email) {
+      return new Response(JSON.stringify({ error: 'Vul alle verplichte velden in.' }), { status: 400 });
+    }
+
+    // Sanitize
+    const clean = (s: string) => s.replace(/[<>]/g, '').slice(0, 500);
+
+    await writeClient.create({
+      _type: 'bouwerAanmelding',
+      naam: clean(data.naam),
+      email: clean(data.email),
+      bedrag: clean(data.bedrag || '20'),
+      datum: new Date().toISOString(),
+      status: 'wachtlijst',
+    });
+
+    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+  } catch (err) {
+    console.error('[api/bouwer-waitlist] Error:', (err as Error).message);
+    return new Response(JSON.stringify({ error: 'Er ging iets mis. Probeer later opnieuw.' }), { status: 500 });
+  }
+};

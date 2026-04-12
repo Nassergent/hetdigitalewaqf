@@ -44,12 +44,15 @@ import Layout from '../layouts/Layout.astro';
               <textarea id="contact-message" rows="5" maxlength="2000" placeholder="Waar kunnen wij u mee helpen?" class="input" required></textarea>
             </div>
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" class="mt-1 shrink-0" required />
+              <input type="checkbox" class="mt-1 shrink-0 checkbox-touch" required />
               <span class="text-sm text-text-light">
                 Ik ga akkoord met het <a href="/privacy" class="text-clarity">privacybeleid</a> en verwerking van mijn gegevens conform de GDPR.
               </span>
             </label>
             <div class="form-message" id="contact-form-message" role="alert" aria-live="polite"></div>
+            <div style="position: absolute; left: -9999px;" aria-hidden="true">
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </div>
             <button type="submit" class="btn btn-capital w-full text-center" id="contact-submit">Versturen</button>
           </form>
         </div>
@@ -81,26 +84,47 @@ import Layout from '../layouts/Layout.astro';
 
 <script>
   const form = document.querySelector('form');
-  const submitBtn = document.getElementById('contact-submit');
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
   const message = document.getElementById('contact-form-message');
 
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const honeypot = (form.querySelector('input[name="website"]') as HTMLInputElement)?.value;
     if (!submitBtn || !message) return;
 
+    const naam = (document.getElementById('contact-name') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('contact-email') as HTMLInputElement).value.trim();
+    const onderwerp = (document.getElementById('contact-subject') as HTMLSelectElement).value;
+    const bericht = (document.getElementById('contact-message') as HTMLTextAreaElement).value.trim();
+
     submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
     submitBtn.textContent = 'Verzenden...';
     message.className = 'form-message';
 
-    // Simulate submission (replace with actual backend endpoint)
-    setTimeout(() => {
-      submitBtn.classList.remove('loading');
-      submitBtn.textContent = 'Versturen';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ naam, email, onderwerp, bericht, website: honeypot }),
+      });
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.error || 'Er ging iets mis.');
+      }
+
       message.className = 'form-message visible success';
-      const emailVal = (document.getElementById('contact-email') as HTMLInputElement)?.value || '';
-      const safeEmail = emailVal.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      const safeEmail = email.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
       message.innerHTML = '<strong>Bericht ontvangen, jazakAllahu khayran!</strong><br><span style="font-size: 0.85em; display: block; margin-top: 6px; line-height: 1.6;">We reageren binnen 48 uur op <strong>' + safeEmail + '</strong>. Controleer ook uw spam-folder. Dringend? Mail direct naar <a href="mailto:salam@ummah.be" style="color: var(--color-clarity); text-decoration: underline;">salam@ummah.be</a>.</span>';
       form.reset();
-    }, 1500);
+    } catch (err: any) {
+      message.className = 'form-message visible error';
+      message.textContent = err.message || 'Er ging iets mis. Probeer later opnieuw.';
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Versturen';
+    }
   });
 </script>

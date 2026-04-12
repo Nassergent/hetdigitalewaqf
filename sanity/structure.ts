@@ -131,6 +131,42 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
+      // ── Berichten & Aanmeldingen ──
+      S.listItem()
+        .title('📬 Berichten')
+        .child(
+          S.list()
+            .title('Berichten & Aanmeldingen')
+            .items([
+              S.listItem()
+                .title('💬 Contact Berichten')
+                .child(
+                  S.documentList()
+                    .title('Contact Berichten')
+                    .filter('_type == "contactBericht"')
+                    .defaultOrdering([{ field: 'datum', direction: 'desc' }])
+                ),
+              S.listItem()
+                .title('🧱 Bouwer Aanmeldingen')
+                .child(
+                  S.documentList()
+                    .title('Bouwer Aanmeldingen')
+                    .filter('_type == "bouwerAanmelding"')
+                    .defaultOrdering([{ field: 'datum', direction: 'desc' }])
+                ),
+              S.listItem()
+                .title('🏭 Vending Aanvragen')
+                .child(
+                  S.documentList()
+                    .title('Vending Aanvragen')
+                    .filter('_type == "vendingAanvraag"')
+                    .defaultOrdering([{ field: 'datum', direction: 'desc' }])
+                ),
+            ])
+        ),
+
+      S.divider(),
+
       // ── Content ──
       S.listItem()
         .title('📝 Content')

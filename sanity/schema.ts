@@ -12,6 +12,9 @@ import { nieuwsPost } from './schemas/nieuwsPost';
 import { ebook } from './schemas/ebook';
 import { mosque } from './schemas/mosque';
 import { koranAanvraag } from './schemas/koranAanvraag';
+import { contactBericht } from './schemas/contactBericht';
+import { bouwerAanmelding } from './schemas/bouwerAanmelding';
+import { vendingAanvraag } from './schemas/vendingAanvraag';
 
 export const schemaTypes = [
   // Singletons
@@ -30,4 +33,8 @@ export const schemaTypes = [
   ebook,
   mosque,
   koranAanvraag,
+  // Berichten & Aanmeldingen
+  contactBericht,
+  bouwerAanmelding,
+  vendingAanvraag,
 ];

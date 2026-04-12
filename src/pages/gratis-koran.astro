@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 ---
 
 <Layout title="Gratis Koran — Ummah.be Waqf" description="Vraag een gratis Nederlandstalige Koran aan. Geen voorwaarden, geen kosten. Sadaqah jariyah van Ummah.be Waqf.">
@@ -11,6 +12,8 @@ import Layout from '../layouts/Layout.astro';
       <p class="text-lg md:text-xl text-white/80 font-semibold fade-up delay-1">Benieuwd naar de Koran? Wij sturen er eentje. Gratis. Geen verplichtingen.</p>
     </div>
   </section>
+
+  <Breadcrumbs items={[{ label: 'Wat we doen', href: '/wat-we-doen' }, { label: 'Gratis Koran' }]} />
 
   <!-- WAAROM -->
   <section class="section">

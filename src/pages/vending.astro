@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 ---
 
 <Layout title="Vending Machines — Ummah.be Waqf" description="Verdien 25% commissie op de omzet zonder aankoopkosten. Wij plaatsen en beheren een vending machine met ethisch gescreend assortiment in uw locatie.">
@@ -16,6 +17,8 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </section>
+
+  <Breadcrumbs items={[{ label: 'Wat we doen', href: '/wat-we-doen' }, { label: 'Vending Machines' }]} />
 
   <!-- HOE HET WERKT -->
   <section class="section" style="background: white;">
@@ -398,14 +401,16 @@ import Layout from '../layouts/Layout.astro';
 
     if (!form || !message) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const naam = (form.querySelector('#naam') as HTMLInputElement).value.trim();
       const telefoon = (form.querySelector('#telefoon') as HTMLInputElement).value.trim();
+      const email = (form.querySelector('#email') as HTMLInputElement)?.value.trim() || '';
       const adres = (form.querySelector('#adres') as HTMLInputElement).value.trim();
-      const typeLocatie = (form.querySelector('#type-locatie') as HTMLSelectElement).value;
+      const locatieType = (form.querySelector('#type-locatie') as HTMLSelectElement).value;
       const bezoekers = (form.querySelector('#bezoekers') as HTMLSelectElement).value;
+      const opmerkingen = (form.querySelector('#opmerkingen') as HTMLTextAreaElement)?.value.trim() || '';
       const privacy = (form.querySelector('#privacy') as HTMLInputElement).checked;
 
       // Validation
@@ -415,7 +420,7 @@ import Layout from '../layouts/Layout.astro';
         return;
       }
 
-      if (!typeLocatie) {
+      if (!locatieType) {
         message.textContent = 'Selecteer een type locatie.';
         message.className = 'form-message visible error';
         return;
@@ -433,19 +438,33 @@ import Layout from '../layouts/Layout.astro';
         return;
       }
 
-      // Simulate submission
       const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
+      message.className = 'form-message';
 
-      setTimeout(() => {
-        submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
+      try {
+        const res = await fetch('/api/vending-aanvraag', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ naam, telefoon, email, adres, locatieType, bezoekers, opmerkingen }),
+        });
+        const json = await res.json();
+
+        if (!res.ok) {
+          throw new Error(json.error || 'Er ging iets mis.');
+        }
+
         form.reset();
-
         message.textContent = 'Bedankt! Wij nemen binnen 48 uur telefonisch contact op.';
         message.className = 'form-message visible success';
-      }, 1500);
+      } catch (err: any) {
+        message.textContent = err.message || 'Er ging iets mis. Probeer later opnieuw.';
+        message.className = 'form-message visible error';
+      } finally {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
     });
   })();
 </script>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  items: Array<{ label: string; href?: string }>;
+}
+const { items } = Astro.props;
+---
+
+<nav aria-label="Kruimelpad" class="container py-3 text-sm">
+  <ol class="flex items-center gap-1.5 text-text-light">
+    <li><a href="/" class="hover:text-capital no-underline transition-colors">Home</a></li>
+    {items.map((item, i) => (
+      <>
+        <li aria-hidden="true" class="text-text-light/50">/</li>
+        <li>
+          {item.href ? (
+            <a href={item.href} class="hover:text-capital no-underline transition-colors">{item.label}</a>
+          ) : (
+            <span class="text-capital font-medium">{item.label}</span>
+          )}
+        </li>
+      </>
+    ))}
+  </ol>
+</nav>

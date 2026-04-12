@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import { fetchTeamMembers, fetchFatwa } from '../lib/sanity';
 
 const teamLeden = await fetchTeamMembers();
@@ -21,6 +22,8 @@ const fatwa = await fetchFatwa();
       </p>
     </div>
   </section>
+
+  <Breadcrumbs items={[{ label: 'Governance' }]} />
 
   <!-- TRUSTEE -->
   <section class="section">
