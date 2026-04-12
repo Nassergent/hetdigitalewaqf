@@ -116,6 +116,15 @@ export async function fetchNieuwsPosts() {
 
 // ── E-books ──
 
+export async function fetchAllEbooks() {
+  return await safe(sanityClient.fetch(
+    `*[_type == "ebook"] | order(volgorde asc){
+      titel, categorie, beschrijving, aantalPaginas, omslagKleur, downloadCount, gepubliceerd,
+      "pdfUrl": pdfBestand.asset->url
+    }`
+  ), 'fetchAllEbooks') ?? [];
+}
+
 export async function fetchEbooks(categorie?: string) {
   if (categorie) {
     return await safe(sanityClient.fetch(

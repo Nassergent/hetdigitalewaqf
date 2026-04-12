@@ -1,33 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
-import { fetchEbooks } from '../lib/sanity';
+import { fetchAllEbooks } from '../lib/sanity';
 
-const sanityEbooks = await fetchEbooks();
+const allEbooks = await fetchAllEbooks();
 
-// Fallback naar hardcoded data als Sanity leeg is
-const fallbackEbooks = [
-  { titel: "Wat is Islam?", categorie: "Nieuw bij Islam", beschrijving: "Een heldere introductie voor iedereen die meer wilt weten over de islam. Geschreven in begrijpelijk Nederlands.", aantalPaginas: "32 pagina's", omslagKleur: "bg-clarity", pdfUrl: null, downloadCount: 0 },
-  { titel: "De Eerste Stappen", categorie: "Nieuwe Moslims", beschrijving: "Een praktische gids voor wie de shahada heeft uitgesproken. Van gebed tot gemeenschap.", aantalPaginas: "48 pagina's", omslagKleur: "bg-capital", pdfUrl: null, downloadCount: 0 },
-  { titel: "Waqf: Een Eeuwige Gift", categorie: "Islamitische Financiën", beschrijving: "Alles over de waqf-traditie — van de Profeet ﷺ tot vandaag.", aantalPaginas: "24 pagina's", omslagKleur: "bg-gold", pdfUrl: null, downloadCount: 0 },
-  { titel: "Ramadan Handboek", categorie: "Voor het Gezin", beschrijving: "Praktische tips, dua's en uitleg over de vastenmaand. Voor het hele gezin.", aantalPaginas: "40 pagina's", omslagKleur: "bg-growth", pdfUrl: null, downloadCount: 0 },
-];
-
-const ebooks = sanityEbooks.length > 0 ? sanityEbooks : fallbackEbooks;
-const totalDownloads = ebooks.reduce((sum: number, e: any) => sum + (e.downloadCount || 0), 0);
-
-// Dynamische categorieën uit data + "Alle"
-const uniqueCategories = [...new Set(ebooks.map((e: any) => e.categorie))];
-const categories = ["Alle", ...uniqueCategories];
+// Split in beschikbaar en gepland
+const beschikbaar = allEbooks.filter((e: any) => e.gepubliceerd);
+const gepland = allEbooks.filter((e: any) => !e.gepubliceerd);
+const totalDownloads = beschikbaar.reduce((sum: number, e: any) => sum + (e.downloadCount || 0), 0);
 ---
 
-<Layout title="E-books — Ummah.be Waqf" description="Gratis islamitische e-books als sadaqah jariyah. Download zonder voorwaarden.">
+<Layout title="E-books — Ontdek de Islam Serie | Ummah.be Waqf" description="Gratis e-books over de islam: van introductie tot verdieping. De Ontdek de Islam serie — sadaqah jariyah door kennis.">
 
   <!-- HERO -->
-  <section class="section" style="background: var(--color-peace);">
+  <section class="section" style="background: var(--color-capital);">
     <div class="container text-center max-w-[700px]">
-      <h1 class="mb-4 fade-up text-capital">E-books</h1>
-      <p class="text-lg md:text-xl text-clarity font-semibold fade-up delay-1">Gratis kennis als sadaqah jariyah — voor iedereen</p>
+      <span class="badge badge-sacred mb-4 fade-up">Ontdek de Islam Serie</span>
+      <h1 class="text-white mb-4 fade-up delay-1">E-books</h1>
+      <p class="text-white/80 text-lg fade-up delay-2">Gratis kennis als sadaqah jariyah — van introductie tot verdieping</p>
     </div>
   </section>
 
@@ -48,63 +39,63 @@ const categories = ["Alle", ...uniqueCategories];
     </div>
   </section>
 
-  <!-- E-BOOKS SECTION -->
+  <!-- BESCHIKBARE E-BOOKS -->
   <section class="section" style="background: white;">
-    <div class="container">
+    <div class="container max-w-[900px]">
+      <h2 class="text-center mb-4 fade-up">Beschikbaar</h2>
+      <p class="text-center text-text-light mb-10 fade-up delay-1">Gratis te downloaden — geen email vereist, geen voorwaarden.</p>
 
-      <!-- Download counter -->
-      <div class="text-center mb-8 fade-up">
-        <p class="text-sm font-semibold text-text-light">
-          <span class="text-capital font-bold text-lg">{totalDownloads}</span> e-books gedownload
-        </p>
-      </div>
+      {totalDownloads > 0 && (
+        <div class="text-center mb-8 fade-up">
+          <p class="text-sm font-semibold text-text-light">
+            <span class="text-capital font-bold text-lg">{totalDownloads}</span> e-books gedownload
+          </p>
+        </div>
+      )}
 
-      <!-- Category filter -->
-      <div class="flex gap-2 mb-12 justify-center flex-wrap fade-up delay-1" role="tablist" aria-label="E-book categorieën">
-        {categories.map((cat, i) => (
-          <button
-            class="filter-btn btn text-xs"
-            data-category={cat}
-            role="tab"
-            aria-selected={i === 0 ? "true" : "false"}
-            style={i === 0 ? "background: var(--color-capital); color: var(--color-peace);" : "background: var(--color-border); color: var(--color-text);"}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      <!-- E-books grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="ebooks-grid">
-        {ebooks.map((book, i) => (
-          <div class={`card fade-up delay-${i + 1} ebook-card`} data-category={book.categorie}>
-            <!-- Book cover placeholder -->
-            <div class={`${book.omslagKleur} rounded-lg mb-4 flex items-center justify-center p-6`} style="min-height: 180px;">
-              <p class="font-heading font-bold text-lg text-center text-white leading-tight">{book.titel}</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {beschikbaar.map((book: any, i: number) => (
+          <div class="card card-capital fade-up" style={`animation-delay: ${i * 0.06}s;`}>
+            <div class={`${book.omslagKleur} rounded-lg mb-4 flex items-center justify-center p-6`} style="min-height: 160px;">
+              <div class="text-center">
+                <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Boek {i + 1}</p>
+                <p class="font-heading font-bold text-lg text-white leading-tight">{book.titel}</p>
+              </div>
             </div>
-
-            <!-- Category badge -->
             <span class="badge badge-sacred mb-3">{book.categorie}</span>
-
-            <!-- Title -->
             <h3 class="text-lg mb-2">{book.titel}</h3>
-
-            <!-- Description -->
-            <p class="text-sm text-text-light mb-3 text-clamp-3">{book.beschrijving}</p>
-
-            <!-- Page count -->
+            <p class="text-sm text-text-light mb-4">{book.beschrijving}</p>
             <p class="text-xs text-text-light mb-4">{book.aantalPaginas}</p>
-
-            <!-- Download button -->
             {book.pdfUrl ? (
               <button class="btn btn-capital text-center w-full block" data-download-url={book.pdfUrl} data-ebook-id={book.titel}>Download PDF</button>
             ) : (
-              <span class="btn text-center w-full block" style="background: var(--color-border); color: var(--color-text-light); cursor: default;">Binnenkort beschikbaar</span>
+              <span class="btn text-center w-full block" style="background: var(--color-border); color: var(--color-text-light); cursor: default;">PDF wordt binnenkort toegevoegd</span>
             )}
           </div>
         ))}
       </div>
+    </div>
+  </section>
 
+  <!-- GEPLANDE TITELS -->
+  <section class="section">
+    <div class="container max-w-[900px]">
+      <h2 class="text-center mb-4 fade-up">Geplande titels in deze serie</h2>
+      <p class="text-center text-text-light mb-10 fade-up delay-1">Deze boeken worden stap voor stap geschreven en gepubliceerd.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {gepland.map((book: any, i: number) => (
+          <div class="card card-static fade-up" style={`animation-delay: ${i * 0.06}s;`}>
+            <div class="flex items-start gap-3">
+              <span class="step-number step-number-capital shrink-0" style="width: 36px; height: 36px; font-size: 14px; margin: 0;">{i + 3}</span>
+              <div>
+                <h3 class="text-base mb-1">{book.titel}</h3>
+                <p class="text-xs text-text-light">{book.categorie}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -148,34 +139,5 @@ const categories = ["Alle", ...uniqueCategories];
     });
   });
 
-  // Category filter functionality
-  (() => {
-    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-    const cards = document.querySelectorAll<HTMLElement>('.ebook-card');
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const category = btn.dataset.category;
-
-        // Update button states
-        filterBtns.forEach(b => {
-          b.setAttribute('aria-selected', 'false');
-          b.style.background = 'var(--color-border)';
-          b.style.color = 'var(--color-text)';
-        });
-        btn.setAttribute('aria-selected', 'true');
-        btn.style.background = 'var(--color-capital)';
-        btn.style.color = 'var(--color-peace)';
-
-        // Filter cards
-        cards.forEach(card => {
-          if (category === 'Alle' || card.dataset.category === category) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  })();
+  // Category filter removed — serie-structuur heeft geen filter nodig
 </script>
