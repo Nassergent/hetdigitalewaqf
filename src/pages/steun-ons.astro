@@ -26,7 +26,7 @@ import Layout from '../layouts/Layout.astro';
       <div id="tab-waqf" class="tab-content fade-up delay-1" role="tabpanel" aria-labelledby="tab-btn-waqf">
         <div class="card card-capital" style="border-top: 3px solid var(--color-gold);">
           <h2 class="mb-2">Bijdragen aan het Waqf-Kapitaal</h2>
-          <p class="text-lg mb-6 text-clarity">Sadaqah jariyah voor de Ummah</p>
+          <p class="text-lg mb-6 text-clarity">Sadaqah jariyah <span class="text-text-light text-sm">(doorlopende liefdadigheid)</span> voor de Ummah</p>
           <p class="mb-6 text-text-light">
             Jouw bijdrage wordt toegevoegd aan het waqf-kapitaal. Dit kapitaal blijft juridisch onschendbaar — alleen de opbrengsten worden gebruikt om programma's te financieren.
           </p>
@@ -118,29 +118,41 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- TAB 3: ZAKAT -->
       <div id="tab-zakat" class="tab-content hidden" role="tabpanel" aria-labelledby="tab-btn-zakat">
-        <div class="card card-zakat">
-          <h2 class="mb-2">Over Zakat</h2>
-          <p class="text-lg mb-6 text-zakat">Belangrijk om te weten</p>
-
-          <div class="p-4 mb-6" style="background: rgba(217,132,91,0.1); border-left: 3px solid var(--color-zakat);">
-            <p class="text-sm font-semibold mb-2 text-zakat-dark">Ummah.be Waqf is géén zakat-instituut.</p>
-            <p class="text-sm text-text">
-              Zakat is een verplichte jaarlijkse gift (2,5% van het vermogen boven de nisab-drempel) die volgens de Qur'an (Surah 9:60) bestemd is voor acht specifieke categorieën begunstigden: de armen, de behoeftigen, zakat-beheerders, nieuwe moslims, slaven, schuldenaren, op Gods weg, en reizigers. Een waqf-bijdrage aan ons kapitaal valt niet binnen deze categorieën.
-            </p>
+        <div class="callout callout-orange" style="padding: 24px; border-radius: 12px;">
+          <div class="flex items-start gap-4 mb-6">
+            <div class="shrink-0 mt-1">
+              <svg class="w-7 h-7 text-zakat" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-xl mb-2 text-zakat-dark">Ummah.be Waqf is géén zakat-instituut</h2>
+              <p class="text-sm text-text">
+                Zakat is een verplichte jaarlijkse gift (2,5% boven de nisab) bestemd voor acht categorieën (Qur'an 9:60). Een waqf-bijdrage valt hier niet onder.
+              </p>
+            </div>
           </div>
 
-          <p class="mb-4 font-semibold text-capital">Waar kan je dan wel zakat geven?</p>
-          <ul class="space-y-2 text-sm mb-6 text-text">
-            <li>• <strong>Islamic Relief België</strong> — internationale zakat-distributie</li>
-            <li>• <strong>Muslim Aid</strong> — humanitaire hulp in 40+ landen</li>
-            <li>• <strong>Lokale moskee</strong> — veel Belgische moskeeën verzamelen zakat voor lokale noden</li>
-          </ul>
+          <p class="font-semibold mb-3 text-capital text-sm">Geef uw zakat via een erkend kanaal:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            <a href="https://www.islamicrelief.be" target="_blank" rel="noopener noreferrer" class="card card-static text-center text-sm no-underline hover:border-zakat transition-colors" style="padding: 14px;">
+              <p class="font-semibold text-text">Islamic Relief België</p>
+              <p class="text-xs text-text-light">Internationale zakat-distributie</p>
+            </a>
+            <a href="https://www.muslimaid.org" target="_blank" rel="noopener noreferrer" class="card card-static text-center text-sm no-underline hover:border-zakat transition-colors" style="padding: 14px;">
+              <p class="font-semibold text-text">Muslim Aid</p>
+              <p class="text-xs text-text-light">Humanitaire hulp in 40+ landen</p>
+            </a>
+            <div class="card card-static text-center text-sm" style="padding: 14px;">
+              <p class="font-semibold text-text">Lokale moskee</p>
+              <p class="text-xs text-text-light">Zakat voor lokale noden</p>
+            </div>
+          </div>
 
-          <p class="text-sm text-text-light">
-            Heb je jouw zakat al afgedragen en wil je daarbovenop iets blijvends doen? Dan is een waqf-bijdrage een perfecte aanvulling — vrijwillige sadaqah jariyah met eeuwige impact.
-          </p>
-
-          <div class="mt-6 text-center">
+          <div class="border-t pt-4" style="border-color: rgba(217,132,91,0.25);">
+            <p class="text-sm text-text-light mb-4">
+              Zakat al afgedragen? Dan is een waqf-bijdrage een mooie aanvulling — vrijwillige sadaqah jariyah (doorlopende liefdadigheid) met eeuwige impact.
+            </p>
             <button type="button" class="btn btn-capital text-xs" data-switch-tab="waqf">Bekijk Waqf Bijdrage</button>
           </div>
         </div>
